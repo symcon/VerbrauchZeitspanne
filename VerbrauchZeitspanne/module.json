@@ -10,5 +10,6 @@
 	"parentRequirements": [],
 	"childRequirements": [],
 	"implemented": [],
-	"prefix": "VIZ"
+	"prefix": "VIZ",
+	"url": "https://github.com/symcon/VerbrauchZeitspanne/tree/master/VerbrauchZeitspanne"
 }

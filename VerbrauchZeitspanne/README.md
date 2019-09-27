@@ -1,6 +1,6 @@
 # VerbrauchZeitspanne
 
-### Inhaltverzeichnis
+### Inhaltsverzeichnis
 
 1. [Funktionsumfang](#1-funktionsumfang)
 2. [Voraussetzungen](#2-voraussetzungen)
@@ -17,17 +17,17 @@
 
 ### 2. Voraussetzungen
 
-- IP-Symcon ab Version 4.x
+- IP-Symcon ab Version 4.2
 
 ### 3. Software-Installation
 
 * Über den Modul Store das Modul Verbrauch in Zeitspanne installieren.
 * Alternativ über das Modul Control folgende URL hinzufügen:
-´https://github.com/symcon/VerbrauchZeitspanne`  
+`https://github.com/symcon/VerbrauchZeitspanne`  
 
 ### 4. Einrichten der Instanzen in IP-Symcon
 
-- Unter "Instanz hinzufügen" ist das 'Verbrauch in Zeitspanne'-Modul unter dem Hersteller '(Sonstige)' aufgeführt.  
+- Unter "Instanz hinzufügen" ist das 'Verbrauch in Zeitspanne'-Modul unter dem Hersteller '(Gerät)' aufgeführt.  
 
 __Konfigurationsseite__:
 
@@ -49,7 +49,7 @@ Verbrauch   | Float   | Verbrauch zwischen Start- und End-Datum
 
 ##### Profile
 
-Es werden keine zusätzlichen Profile hinzugefügt
+Es werden keine zusätzlichen Profile hinzugefügt.
 
 ### 6. WebFront
 

@@ -56,6 +56,14 @@ declare(strict_types=1);
                         return;
                 }
             }
+
+            //Add references
+            foreach ($this->GetReferenceList() as $referenceID) {
+                $this->UnregisterReference($referenceID);
+            }
+            if ($sourceVariable != 0 && IPS_VariableExists($sourceVariable)) {
+                $this->RegisterReference($sourceVariable);
+            }
         }
 
         public function RequestAction($Ident, $Value)

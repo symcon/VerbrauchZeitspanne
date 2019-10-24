@@ -61,7 +61,7 @@ declare(strict_types=1);
             foreach ($this->GetReferenceList() as $referenceID) {
                 $this->UnregisterReference($referenceID);
             }
-            if ($sourceVariable != 0 && IPS_VariableExists($sourceVariable)) {
+            if (IPS_VariableExists($sourceVariable)) {
                 $this->RegisterReference($sourceVariable);
             }
         }

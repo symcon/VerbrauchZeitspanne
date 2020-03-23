@@ -23,8 +23,8 @@ include_once __DIR__ . '/timetest.php';
 
             //Get profile
             $timeProfile = '';
-            $lod =  $this->ReadPropertyInteger('LevelOfDetail');
-            switch($lod) {
+            $lod = $this->ReadPropertyInteger('LevelOfDetail');
+            switch ($lod) {
                 case 0:
                     $timeProfile = '~UnixTimestampDate';
                     break;
@@ -50,7 +50,6 @@ include_once __DIR__ . '/timetest.php';
             if (GetValue($this->GetIDForIdent('EndDate')) == 0 || $lod == 1) {
                 SetValue($this->GetIDForIdent('EndDate'), $this->getTime());
             }
-  
 
             $sourceVariable = $this->ReadPropertyInteger('SourceVariable');
             if ($sourceVariable > 0 && IPS_VariableExists($sourceVariable)) {
@@ -115,7 +114,7 @@ include_once __DIR__ . '/timetest.php';
             $endDate = GetValue($this->GetIDForIdent('EndDate'));
             $lod = $this->ReadPropertyInteger('LevelOfDetail');
             $sum = 0;
-            switch($lod) {
+            switch ($lod) {
                 case 0: // Date
                     $values = AC_GetAggregatedValues($acID, $variableID, 1 /* Day */, $startDate, $endDate + (24 * 3600) - 1, 0);
                     break;
@@ -130,7 +129,7 @@ include_once __DIR__ . '/timetest.php';
                     //Houres
                     $hoursStart = strtotime(intval(date('H', $startDate)) + 1 . ':00:00', $this->getTime());
                     $this->SendDebug('StartHours', date('H:i:s', $hoursStart), 0);
-                    $hoursEnd = strtotime(intval(date('H', $endDate))- 1 . ':59:59', $this->getTime());
+                    $hoursEnd = strtotime(intval(date('H', $endDate)) - 1 . ':59:59', $this->getTime());
                     $this->SendDebug('EndHours', date('H:i:s', $hoursEnd), 0);
                     $houres = AC_GetAggregatedValues($acID, $variableID, 0 /* Hour */, $hoursStart, $hoursEnd, 0);
 
@@ -160,7 +159,7 @@ include_once __DIR__ . '/timetest.php';
                     $firstHours = AC_GetAggregatedValues($acID, $variableID, 0 /* Hour */, $firstHoursStart, $firstHoursEnd, 0);
 
                     //Days
-                    $daysStart = strtotime(date('d-m-Y', $startDate). ' 00:00:00 tomorrow', $startDate);
+                    $daysStart = strtotime(date('d-m-Y', $startDate) . ' 00:00:00 tomorrow', $startDate);
                     $this->SendDebug('StartDays', date('d.m.Y H:i:s', $daysStart), 0);
                     $daysEnd = strtotime(date('d-m-Y', $endDate) . ' yesterday 23:59:59', $this->getTime());
                     $this->SendDebug('EndDays', date('d.m.Y H:i:s', $daysEnd), 0);

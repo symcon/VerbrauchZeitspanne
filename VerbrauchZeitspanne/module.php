@@ -131,7 +131,7 @@ include_once __DIR__ . '/timetest.php';
                     $this->SendDebug('StartHours', date('H:i:s', $hoursStart), 0);
                     $hoursEnd = strtotime(intval(date('H', $endDate)) - 1 . ':59:59', $this->getTime());
                     $this->SendDebug('EndHours', date('H:i:s', $hoursEnd), 0);
-                    $houres = AC_GetAggregatedValues($acID, $variableID, 0 /* Hour */, $hoursStart, $hoursEnd, 0);
+                    $hours = AC_GetAggregatedValues($acID, $variableID, 0 /* Hour */, $hoursStart, $hoursEnd, 0);
 
                     //LastMinutes
                     $lastMinutesStart = strtotime(date('H', $endDate) . ':00:00', $this->getTime());
@@ -140,7 +140,7 @@ include_once __DIR__ . '/timetest.php';
                     $this->SendDebug('LastMinutsEnd', date('H:i:s', $lastMinutesEnd), 0);
                     $lastMinutes = AC_GetAggregatedValues($acID, $variableID, 6 /* Minutes */, $lastMinutesStart, $lastMinutesEnd, 0);
 
-                    $values = array_merge($firstMinutes, $houres, $lastMinutes);
+                    $values = array_merge($firstMinutes, $hours, $lastMinutes);
                     break;
                 case 2: // Date&Time
 
@@ -149,9 +149,9 @@ include_once __DIR__ . '/timetest.php';
                     $this->SendDebug('FirstMinutsStart', date('H:i:s', $firstMinutesStart), 0);
                     $firstMinutesEnd = strtotime(date('H', $startDate) . ':00:00 next hour', $this->getTime());
                     $this->SendDebug('FirstMinutsEnd', date('H:i:s', $firstMinutesEnd), 0);
-                    $firstMinutes = AC_GetAggregatedValues($acID, $variableID, 6 /* Minutes */, $firstMinutesStart, $firstMinutesEnd, 0);                    //HoursFirst
+                    $firstMinutes = AC_GetAggregatedValues($acID, $variableID, 6 /* Minutes */, $firstMinutesStart, $firstMinutesEnd, 0);
 
-                    //Houres
+                    //FirstHoures
                     $firstHoursStart = strtotime(date('H:00:00', $startDate) . ' next hour', $startDate);
                     $this->SendDebug('FirstHoursStart', date('d.m.Y H:i:s', $firstHoursStart), 0);
                     $firstHoursEnd = strtotime('23:59:59', $startDate);
@@ -165,7 +165,7 @@ include_once __DIR__ . '/timetest.php';
                     $this->SendDebug('EndDays', date('d.m.Y H:i:s', $daysEnd), 0);
                     $days = AC_GetAggregatedValues($acID, $variableID, 1 /* Day */, $daysStart, $daysEnd, 0);
 
-                    //HoursLast
+                    //LastHours
                     $lastHoursStart = strtotime('00:00:00', $endDate);
                     $this->SendDebug('LastHoursStart', date('d.m.Y H:i:s', $lastHoursStart), 0);
                     $lastHoursEnd = strtotime(date('H:00:00', $endDate), $endDate);

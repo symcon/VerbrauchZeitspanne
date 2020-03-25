@@ -93,7 +93,7 @@ class VerbrauchZeitspanneBaseArchiveTest extends TestCase
 
         SetValue(IPS_GetObjectIDByIdent('StartDate', $instanceID), strtotime('02-11-2005 00:00:00'));
         SetValue(IPS_GetObjectIDByIdent('EndDate', $instanceID), strtotime('04-11-2005 23:59:59'));
-        
+
         VIZ_Calculate($instanceID);
 
         $this->assertEquals(6, GetValue(IPS_GetObjectIDByIdent('Usage', $instanceID)));
@@ -381,9 +381,9 @@ class VerbrauchZeitspanneBaseArchiveTest extends TestCase
 
         SetValue(IPS_GetObjectIDByIdent('StartDate', $instanceID), strtotime('05-11-2005 22:58:00'));
         SetValue(IPS_GetObjectIDByIdent('EndDate', $instanceID), strtotime('08-11-2005 02:02:00'));
-        
+
         VIZ_Calculate($instanceID);
-        
+
         $this->assertEquals(18, GetValue(IPS_GetObjectIDByIdent('Usage', $instanceID)));
     }
 }

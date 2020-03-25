@@ -47,58 +47,56 @@ class VerbrauchZeitspanneBaseArchiveTest extends TestCase
         IPS_SetProperty($instanceID, 'SourceVariable', $sourceVariableID);
         IPS_SetProperty($instanceID, 'LevelOfDetail', 0);
         IPS_ApplyChanges($instanceID);
-        +-VIZ_setTime($instanceID, strtotime('5th November 2005 06:00:00'));
+        VIZ_setTime($instanceID, strtotime('5th November 2005 06:00:00'));
 
         AC_SetLoggingStatus($archiveID, $sourceVariableID, true);
         $aggregationDataDay = [
             [
-                'Avg'       => 150,
+                'Avg'       => 100,
                 'Duration'  => 60 * 60 * 24,
-                'Max'       => 50,
-                'MaxTime'   => strtotime('01-11-2005 13:00:00'),
-                'Min'       => 32,
-                'MinTime'   => strtotime('01-11-2005 11:00:00'),
+                'Max'       => 0,
+                'MaxTime'   => 0,
+                'Min'       => 0,
+                'MinTime'   => 0,
                 'TimeStamp' => strtotime('01-11-2005 00:00:00')
             ],
             [
-                'Avg'       => 25,
+                'Avg'       => 2,
                 'Duration'  => 60 * 60 * 24,
-                'Max'       => 50,
-                'MaxTime'   => strtotime('02-11-2005 13:30:00'),
-                'Min'       => 10,
-                'MinTime'   => strtotime('02-11-2005 11:20:00'),
+                'Max'       => 0,
+                'MaxTime'   => 0,
+                'Min'       => 0,
+                'MinTime'   => 0,
                 'TimeStamp' => strtotime('02-11-2005 00:00:00')
             ],
             [
-                'Avg'       => 25,
+                'Avg'       => 2,
                 'Duration'  => 60 * 60 * 24,
-                'Max'       => 50,
-                'MaxTime'   => strtotime('03-11-2005 13:00:00'),
-                'Min'       => 7,
-                'MinTime'   => strtotime('03-11-2005 11:00:00'),
+                'Max'       => 0,
+                'MaxTime'   => 0,
+                'Min'       => 0,
+                'MinTime'   => 0,
                 'TimeStamp' => strtotime('03-11-2005 00:00:00')
             ],
             [
-                'Avg'       => 50,
+                'Avg'       => 2,
                 'Duration'  => 60 * 60 * 24,
-                'Max'       => 75,
-                'MaxTime'   => strtotime('04-11-2005 13:00:00'),
-                'Min'       => 32,
-                'MinTime'   => strtotime('04-11-2005 11:00:00'),
+                'Max'       => 0,
+                'MaxTime'   => 0,
+                'Min'       => 0,
+                'MinTime'   => 0,
                 'TimeStamp' => strtotime('04-11-2005 00:00:00')
             ]
         ];
 
-        IPS_EnableDebug($instanceID, 5);
         AC_StubsAddAggregatedValues($archiveID, $sourceVariableID, 1, $aggregationDataDay);
-        IPS_SendDebug($instanceID, 'AggregationTest', json_encode(AC_GetAggregatedValues($archiveID, $sourceVariableID, 1, strtotime('02-11-2005 00:00:00'), strtotime('04-11-2005 23:59:59'), 0)), 0);
 
         SetValue(IPS_GetObjectIDByIdent('StartDate', $instanceID), strtotime('02-11-2005 00:00:00'));
         SetValue(IPS_GetObjectIDByIdent('EndDate', $instanceID), strtotime('04-11-2005 23:59:59'));
+        
         VIZ_Calculate($instanceID);
-        echo 'Verbrauch: ' . GetValue(IPS_GetObjectIDByIdent('Usage', $instanceID));
-        $this->assertEquals(100, GetValue(IPS_GetObjectIDByIdent('Usage', $instanceID)));
-        $this->assertTrue(true);
+
+        $this->assertEquals(6, GetValue(IPS_GetObjectIDByIdent('Usage', $instanceID)));
     }
 
     public function testTime(): void
@@ -121,27 +119,27 @@ class VerbrauchZeitspanneBaseArchiveTest extends TestCase
             [
                 'Avg'       => 2,
                 'Duration'  => 60,
-                'Max'       => 1,
+                'Max'       => 0,
                 'MaxTime'   => 0,
-                'Min'       => 50,
+                'Min'       => 0,
                 'MinTime'   => 0,
                 'TimeStamp' => strtotime('05-11-2005 06:58:00')
             ],
             [
                 'Avg'       => 2,
                 'Duration'  => 60,
-                'Max'       => 2,
+                'Max'       => 0,
                 'MaxTime'   => 0,
-                'Min'       => 32,
+                'Min'       => 0,
                 'MinTime'   => 0,
                 'TimeStamp' => strtotime('05-11-2005 06:59:00')
             ],
             [
-                'Avg'       => 1,
+                'Avg'       => 100,
                 'Duration'  => 60,
-                'Max'       => 3,
+                'Max'       => 0,
                 'MaxTime'   => 0,
-                'Min'       => 32,
+                'Min'       => 0,
                 'MinTime'   => 0,
                 'TimeStamp' => strtotime('05-11-2005 07:00:00')
             ]
@@ -151,18 +149,18 @@ class VerbrauchZeitspanneBaseArchiveTest extends TestCase
             [
                 'Avg'       => 2,
                 'Duration'  => 60 * 60,
-                'Max'       => 4,
+                'Max'       => 0,
                 'MaxTime'   => 0,
-                'Min'       => 32,
+                'Min'       => 0,
                 'MinTime'   => 0,
                 'TimeStamp' => strtotime('05-11-2005 07:00:00')
             ],
             [
                 'Avg'       => 2,
                 'Duration'  => 60 * 60,
-                'Max'       => 5,
+                'Max'       => 0,
                 'MaxTime'   => 0,
-                'Min'       => 32,
+                'Min'       => 0,
                 'MinTime'   => 0,
                 'TimeStamp' => strtotime('05-11-2005 08:00:00')
             ],
@@ -172,27 +170,27 @@ class VerbrauchZeitspanneBaseArchiveTest extends TestCase
             [
                 'Avg'       => 2,
                 'Duration'  => 60,
-                'Max'       => 6,
+                'Max'       => 0,
                 'MaxTime'   => 0,
-                'Min'       => 50,
+                'Min'       => 0,
                 'MinTime'   => 0,
                 'TimeStamp' => strtotime('05-11-2005 09:00:00')
             ],
             [
                 'Avg'       => 2,
                 'Duration'  => 60,
-                'Max'       => 7,
+                'Max'       => 0,
                 'MaxTime'   => 0,
-                'Min'       => 32,
+                'Min'       => 0,
                 'MinTime'   => 0,
                 'TimeStamp' => strtotime('05-11-2005 09:01:00')
             ],
             [
-                'Avg'       => 2,
+                'Avg'       => 100,
                 'Duration'  => 60,
-                'Max'       => 8,
+                'Max'       => 0,
                 'MaxTime'   => 0,
-                'Min'       => 32,
+                'Min'       => 0,
                 'MinTime'   => 0,
                 'TimeStamp' => strtotime('05-11-2005 09:02:00')
             ]
@@ -202,17 +200,11 @@ class VerbrauchZeitspanneBaseArchiveTest extends TestCase
         AC_StubsAddAggregatedValues($archiveID, $sourceVariableID, 6, $aggregationDataMinuteStart);
         AC_StubsAddAggregatedValues($archiveID, $sourceVariableID, 0, $aggregationDataHour);
         AC_StubsAddAggregatedValues($archiveID, $sourceVariableID, 6, $aggregationDataMinuteEnd);
-        IPS_SendDebug($instanceID, 'AggregatedArchiveContent', json_encode(AC_GetStubArchive($archiveID)), 0);
-        IPS_SendDebug($instanceID, 'AggregationTest', json_encode(
-            AC_GetAggregatedValues($archiveID, $sourceVariableID, 1, strtotime('05-11-2005 06:58:00'), strtotime('05-11-2005 09:02:00'), 0)
-        ), 0);
-
         SetValue(IPS_GetObjectIDByIdent('StartDate', $instanceID), strtotime('05-11-2005 06:58:00'));
         SetValue(IPS_GetObjectIDByIdent('EndDate', $instanceID), strtotime('05-11-2005 09:02:00'));
         VIZ_Calculate($instanceID);
-        echo 'Verbrauch: ' . GetValue(IPS_GetObjectIDByIdent('Usage', $instanceID));
 
-        $this->assertTrue(true);
+        $this->assertEquals(12, GetValue(IPS_GetObjectIDByIdent('Usage', $instanceID)));
     }
 
     public function testDateTime(): void
@@ -227,98 +219,171 @@ class VerbrauchZeitspanneBaseArchiveTest extends TestCase
         IPS_SetProperty($instanceID, 'SourceVariable', $sourceVariableID);
         IPS_SetProperty($instanceID, 'LevelOfDetail', 2);
         IPS_ApplyChanges($instanceID);
-        +-VIZ_setTime($instanceID, strtotime('5th November 2005 19:00:00'));
+        VIZ_setTime($instanceID, strtotime('5th November 2005 19:00:00'));
 
         AC_SetLoggingStatus($archiveID, $sourceVariableID, true);
 
-        $aggregationDataFirstMinuteStart = [
+        $aggregationDataFirstMinutes = [
             [
                 'Avg'       => 2,
                 'Duration'  => 60,
-                'Max'       => 1,
+                'Max'       => 0,
                 'MaxTime'   => 0,
-                'Min'       => 50,
+                'Min'       => 0,
                 'MinTime'   => 0,
-                'TimeStamp' => strtotime('05-11-2005 06:58:00')
+                'TimeStamp' => strtotime('05-11-2005 22:58:00')
             ],
             [
                 'Avg'       => 2,
                 'Duration'  => 60,
-                'Max'       => 2,
+                'Max'       => 0,
                 'MaxTime'   => 0,
-                'Min'       => 32,
+                'Min'       => 0,
                 'MinTime'   => 0,
-                'TimeStamp' => strtotime('05-11-2005 06:59:00')
+                'TimeStamp' => strtotime('05-11-2005 22:59:00')
             ],
             [
-                'Avg'       => 1,
+                'Avg'       => 100,
                 'Duration'  => 60,
-                'Max'       => 3,
+                'Max'       => 0,
                 'MaxTime'   => 0,
-                'Min'       => 32,
+                'Min'       => 0,
                 'MinTime'   => 0,
-                'TimeStamp' => strtotime('05-11-2005 07:00:00')
+                'TimeStamp' => strtotime('05-11-2005 23:00:00')
             ]
         ];
 
-        $aggregationDataHour = [
+        $aggregationDataFirstHours = [
             [
                 'Avg'       => 2,
                 'Duration'  => 60 * 60,
-                'Max'       => 4,
+                'Max'       => 0,
                 'MaxTime'   => 0,
-                'Min'       => 32,
+                'Min'       => 0,
                 'MinTime'   => 0,
-                'TimeStamp' => strtotime('05-11-2005 07:00:00')
+                'TimeStamp' => strtotime('05-11-2005 23:00:00')
             ],
             [
-                'Avg'       => 2,
+                'Avg'       => 100,
                 'Duration'  => 60 * 60,
-                'Max'       => 5,
+                'Max'       => 0,
                 'MaxTime'   => 0,
-                'Min'       => 32,
+                'Min'       => 0,
                 'MinTime'   => 0,
-                'TimeStamp' => strtotime('05-11-2005 08:00:00')
+                'TimeStamp' => strtotime('05-11-2005 24:00:00')
             ],
         ];
 
-        $aggregationDataMinuteEnd = [
+        $aggregationDataDay = [
             [
-                'Avg'       => 2,
-                'Duration'  => 60,
-                'Max'       => 6,
+                'Avg'       => 100,
+                'Duration'  => 60 * 60 * 24,
+                'Max'       => 0,
                 'MaxTime'   => 0,
-                'Min'       => 50,
+                'Min'       => 0,
                 'MinTime'   => 0,
-                'TimeStamp' => strtotime('05-11-2005 09:00:00')
+                'TimeStamp' => strtotime('05-11-2005 00:00:00')
             ],
             [
                 'Avg'       => 2,
-                'Duration'  => 60,
-                'Max'       => 7,
+                'Duration'  => 60 * 60 * 24,
+                'Max'       => 0,
                 'MaxTime'   => 0,
-                'Min'       => 32,
+                'Min'       => 0,
                 'MinTime'   => 0,
-                'TimeStamp' => strtotime('05-11-2005 09:01:00')
+                'TimeStamp' => strtotime('06-11-2005 00:00:00')
             ],
             [
                 'Avg'       => 2,
-                'Duration'  => 60,
-                'Max'       => 8,
+                'Duration'  => 60 * 60 * 24,
+                'Max'       => 0,
                 'MaxTime'   => 0,
-                'Min'       => 32,
+                'Min'       => 0,
                 'MinTime'   => 0,
-                'TimeStamp' => strtotime('05-11-2005 09:02:00')
+                'TimeStamp' => strtotime('07-11-2005 00:00:00')
+            ],
+            [
+                'Avg'       => 100,
+                'Duration'  => 60 * 60 * 24,
+                'Max'       => 0,
+                'MaxTime'   => 0,
+                'Min'       => 0,
+                'MinTime'   => 0,
+                'TimeStamp' => strtotime('08-11-2005 00:00:00')
             ]
         ];
 
-        IPS_EnableDebug($instanceID, 5);
+        $aggregationDataLastHours = [
+            [
+                'Avg'       => 2,
+                'Duration'  => 60 * 60,
+                'Max'       => 0,
+                'MaxTime'   => 0,
+                'Min'       => 0,
+                'MinTime'   => 0,
+                'TimeStamp' => strtotime('08-11-2005 00:00:00')
+            ],
+            [
+                'Avg'       => 2,
+                'Duration'  => 60 * 60,
+                'Max'       => 0,
+                'MaxTime'   => 0,
+                'Min'       => 0,
+                'MinTime'   => 0,
+                'TimeStamp' => strtotime('08-11-2005 01:00:00')
+            ],
+            [
+                'Avg'       => 100,
+                'Duration'  => 60 * 60,
+                'Max'       => 0,
+                'MaxTime'   => 0,
+                'Min'       => 0,
+                'MinTime'   => 0,
+                'TimeStamp' => strtotime('08-11-2005 02:00:00')
+            ]
+        ];
 
-        SetValue(IPS_GetObjectIDByIdent('StartDate', $instanceID), strtotime('05-11-2005 06:58:00'));
-        SetValue(IPS_GetObjectIDByIdent('EndDate', $instanceID), strtotime('08-11-2005 09:02:00'));
+        $aggregationDataLastMinutes = [
+            [
+                'Avg'       => 2,
+                'Duration'  => 60,
+                'Max'       => 0,
+                'MaxTime'   => 0,
+                'Min'       => 0,
+                'MinTime'   => 0,
+                'TimeStamp' => strtotime('08-11-2005 02:00:00')
+            ],
+            [
+                'Avg'       => 2,
+                'Duration'  => 60,
+                'Max'       => 0,
+                'MaxTime'   => 0,
+                'Min'       => 0,
+                'MinTime'   => 0,
+                'TimeStamp' => strtotime('08-11-2005 02:01:00')
+            ],
+            [
+                'Avg'       => 100,
+                'Duration'  => 60,
+                'Max'       => 0,
+                'MaxTime'   => 0,
+                'Min'       => 0,
+                'MinTime'   => 0,
+                'TimeStamp' => strtotime('08-11-2005 02:02:00')
+            ]
+        ];
 
+        AC_StubsAddAggregatedValues($archiveID, $sourceVariableID, 6, $aggregationDataFirstMinutes);
+        AC_StubsAddAggregatedValues($archiveID, $sourceVariableID, 0, $aggregationDataFirstHours);
+        AC_StubsAddAggregatedValues($archiveID, $sourceVariableID, 1, $aggregationDataDay);
+        AC_StubsAddAggregatedValues($archiveID, $sourceVariableID, 0, $aggregationDataLastHours);
+        AC_StubsAddAggregatedValues($archiveID, $sourceVariableID, 6, $aggregationDataLastMinutes);
+
+        SetValue(IPS_GetObjectIDByIdent('StartDate', $instanceID), strtotime('05-11-2005 22:58:00'));
+        SetValue(IPS_GetObjectIDByIdent('EndDate', $instanceID), strtotime('08-11-2005 02:02:00'));
+        
         VIZ_Calculate($instanceID);
-
-        $this->assertTrue(true);
+        
+        $this->assertEquals(18, GetValue(IPS_GetObjectIDByIdent('Usage', $instanceID)));
     }
 }

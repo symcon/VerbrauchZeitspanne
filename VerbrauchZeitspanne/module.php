@@ -173,21 +173,21 @@ include_once __DIR__ . '/timetest.php';
                     $lastHours = AC_GetAggregatedValues($acID, $variableID, 0 /* Hour */, $lastHoursStart, $lastHoursEnd, 0);
 
                     //LastMinutes
-                    $lastMinutesStart = strtotime(date('H', $endDate) . ':00:00', $this->getTime());
-                    $this->SendDebug('LastMinutsStart', date('H:i:s', $lastMinutesStart), 0);
-                    $lastMinutesEnd = strtotime(date('H:i', $endDate) . ':00', $this->getTime());
-                    $this->SendDebug('LastMinutsEnd', date('H:i:s', $lastMinutesEnd), 0);
+                    $lastMinutesStart = strtotime(date('d.m.Y H', $endDate) . ':00:00', $this->getTime());
+                    $this->SendDebug('LastMinutsStart', date('d.m.Y H:i:s', $lastMinutesStart), 0);
+                    $lastMinutesEnd = strtotime(date('d.m.Y H:i', $endDate) . ':00', $this->getTime());
+                    $this->SendDebug('LastMinutsEnd', date('d.m.Y H:i:s', $lastMinutesEnd), 0);
                     $lastMinutes = AC_GetAggregatedValues($acID, $variableID, 6 /* Minutes */, $lastMinutesStart, $lastMinutesEnd, 0);
 
                     $values = array_merge($firstMinutes, $firstHours, $days, $lastHours, $lastMinutes);
                     break;
             }
-            $this->SendDebug('CollectedValues', print_r($values, true), 0);
+
             if ($values === false) {
                 $this->SendDebug('Error', 'NoData', 0);
                 return;
             }
-            $this->SendDebug('ValuesArray', print_r($values, true), 0);
+
             foreach ($values as $value) {
                 $sum += $value['Avg'];
             }

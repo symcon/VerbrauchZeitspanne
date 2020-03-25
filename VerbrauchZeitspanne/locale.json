@@ -1,7 +1,11 @@
 {
 	"translations": {
 		"de": { 
-			"Source": "Quelle"
+			"Source": "Quelle",
+			"Level of Detail": "Detailgrad",
+			"Date": "Datum",
+			"Time": "Uhrzeit",
+			"Date/Time": "Datum/Uhrzeit"
 		}
 	}
 }

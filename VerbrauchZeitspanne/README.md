@@ -33,7 +33,8 @@ __Konfigurationsseite__:
 
 Name               | Beschreibung
 ------------------ | ---------------------------------
-Quelle             | Quellvariable, die für Verbrauch genutzt werden soll.
+Quelle             | Quellvariable, die für Verbrauch genutzt werden soll
+Detailgrad         | Legt fest wie genau der Start- und Endzeitpunkt festgelegt werden kann (Datum, Uhrzeit, Datum/Uhrzeit)
 
 ### 5. Statusvariablen und Profile
 

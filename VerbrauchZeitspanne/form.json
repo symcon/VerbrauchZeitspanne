@@ -11,9 +11,9 @@
 			"name": "LevelOfDetail",
 			"caption": "Level of Detail",
 			"options": [
-				{"caption": "Date", "value":0},
-				{"caption": "Time", "value":1},
-				{"caption": "Date/Time", "value":2}
+				{"caption": "Date", "value": 0},
+				{"caption": "Time", "value": 1},
+				{"caption": "Date/Time", "value": 2}
 			]
 		}
 	]

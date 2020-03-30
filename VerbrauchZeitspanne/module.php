@@ -5,7 +5,9 @@ declare(strict_types=1);
 include_once __DIR__ . '/timetest.php';
     class VerbrauchZeitspanne extends IPSModule
     {
+        //Using an own time() function in order to use cutsom time while testing
         use TestTime;
+
         public function Create()
         {
             //Never delete this line!

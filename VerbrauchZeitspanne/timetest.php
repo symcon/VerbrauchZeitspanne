@@ -12,7 +12,7 @@ if (defined('PHPUNIT_TESTSUITE')) {
             return $this->currentTime;
         }
 
-        public function setTime(int $Time)
+        public function SetTime(int $Time)
         {
             $this->currentTime = $Time;
         }

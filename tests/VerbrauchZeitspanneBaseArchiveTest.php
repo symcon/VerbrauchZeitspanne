@@ -47,7 +47,7 @@ class VerbrauchZeitspanneBaseArchiveTest extends TestCase
         IPS_SetProperty($instanceID, 'SourceVariable', $sourceVariableID);
         IPS_SetProperty($instanceID, 'LevelOfDetail', 0);
         IPS_ApplyChanges($instanceID);
-        VIZ_setTime($instanceID, strtotime('5th November 2005 06:00:00'));
+        VIZ_SetTime($instanceID, strtotime('5th November 2005 06:00:00'));
 
         AC_SetLoggingStatus($archiveID, $sourceVariableID, true);
         $aggregationDataDay = [
@@ -111,7 +111,7 @@ class VerbrauchZeitspanneBaseArchiveTest extends TestCase
         IPS_SetProperty($instanceID, 'SourceVariable', $sourceVariableID);
         IPS_SetProperty($instanceID, 'LevelOfDetail', 1);
         IPS_ApplyChanges($instanceID);
-        VIZ_setTime($instanceID, strtotime('5th November 2005 19:00:00'));
+        VIZ_SetTime($instanceID, strtotime('5th November 2005 19:00:00'));
 
         AC_SetLoggingStatus($archiveID, $sourceVariableID, true);
 
@@ -219,7 +219,7 @@ class VerbrauchZeitspanneBaseArchiveTest extends TestCase
         IPS_SetProperty($instanceID, 'SourceVariable', $sourceVariableID);
         IPS_SetProperty($instanceID, 'LevelOfDetail', 2);
         IPS_ApplyChanges($instanceID);
-        VIZ_setTime($instanceID, strtotime('5th November 2005 19:00:00'));
+        VIZ_SetTime($instanceID, strtotime('5th November 2005 19:00:00'));
 
         AC_SetLoggingStatus($archiveID, $sourceVariableID, true);
 

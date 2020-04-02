@@ -2,6 +2,9 @@
 
 declare(strict_types=1);
 
+define('LOD_DATE', 0);
+define('LOD_TIME', 1);
+define('LOD_DATETIME', 2);
 include_once __DIR__ . '/timetest.php';
     class VerbrauchZeitspanne extends IPSModule
     {
@@ -25,15 +28,15 @@ include_once __DIR__ . '/timetest.php';
 
             //Get profile
             $timeProfile = '';
-            $lod = $this->ReadPropertyInteger('LevelOfDetail');
-            switch ($lod) {
-                case 0:
+            $levelOfDetail = $this->ReadPropertyInteger('LevelOfDetail');
+            switch ($levelOfDetail) {
+                case LOD_DATE:
                     $timeProfile = '~UnixTimestampDate';
                     break;
-                case 1:
+                case LOD_TIME:
                     $timeProfile = '~UnixTimestampTime';
                     break;
-                case 2:
+                case LOD_DATETIME:
                     $timeProfile = '~UnixTimestamp';
                     break;
             }
@@ -42,14 +45,14 @@ include_once __DIR__ . '/timetest.php';
             $this->RegisterVariableInteger('StartDate', 'Start-Datum', $timeProfile, 1);
             $this->EnableAction('StartDate');
 
-            if (GetValue($this->GetIDForIdent('StartDate')) == 0 || $lod == 1) {
+            if (GetValue($this->GetIDForIdent('StartDate')) == 0 || $levelOfDetail == 1) {
                 SetValue($this->GetIDForIdent('StartDate'), $this->getTime());
             }
 
             $this->RegisterVariableInteger('EndDate', 'End-Datum', $timeProfile, 2);
             $this->EnableAction('EndDate');
 
-            if (GetValue($this->GetIDForIdent('EndDate')) == 0 || $lod == 1) {
+            if (GetValue($this->GetIDForIdent('EndDate')) == 0 || $levelOfDetail == 1) {
                 SetValue($this->GetIDForIdent('EndDate'), $this->getTime());
             }
 
@@ -114,13 +117,13 @@ include_once __DIR__ . '/timetest.php';
             $variableID = $this->ReadPropertyInteger('SourceVariable');
             $startDate = GetValue($this->GetIDForIdent('StartDate'));
             $endDate = GetValue($this->GetIDForIdent('EndDate'));
-            $lod = $this->ReadPropertyInteger('LevelOfDetail');
+            $levelOfDetail = $this->ReadPropertyInteger('LevelOfDetail');
             $sum = 0;
-            switch ($lod) {
-                case 0: // Date
-                    $values = AC_GetAggregatedValues($acID, $variableID, 1 /* Day */, $startDate, $endDate + (24 * 3600) - 1, 0);
+            switch ($levelOfDetail) {
+                case LOD_DATE:
+                    $values = AC_GetAggregatedValues($acID, $variableID, 1 /* Day */, $startDate, strtotime(date('d-m-Y', $endDate) . ' 23:59:59'), 0);
                     break;
-                case 1: // Time
+                case LOD_TIME:
                     //FirstMinutes
                     $firstMinutesStart = strtotime(date('H:i', $startDate) . ':00', $this->getTime());
                     $this->SendDebug('FirstMinutsStart', date('H:i:s', $firstMinutesStart), 0);
@@ -144,7 +147,7 @@ include_once __DIR__ . '/timetest.php';
 
                     $values = array_merge($firstMinutes, $hours, $lastMinutes);
                     break;
-                case 2: // Date&Time
+                case LOD_DATETIME:
 
                     //FirstMinutes
                     $firstMinutesStart = strtotime(date('H:i', $startDate) . ':00', $this->getTime());

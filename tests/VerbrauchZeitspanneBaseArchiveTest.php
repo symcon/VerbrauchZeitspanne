@@ -51,7 +51,7 @@ class VerbrauchZeitspanneBaseArchiveTest extends TestCase
         AC_SetLoggingStatus($archiveID, $sourceVariableID, true);
         $aggregationDataDay = [
             [
-                'Avg'       => 100,
+                'Avg'       => 1000,
                 'Duration'  => 60 * 60 * 24,
                 'Max'       => 0,
                 'MaxTime'   => 0,
@@ -60,7 +60,7 @@ class VerbrauchZeitspanneBaseArchiveTest extends TestCase
                 'TimeStamp' => strtotime('01-11-2005 00:00:00')
             ],
             [
-                'Avg'       => 2,
+                'Avg'       => 41,
                 'Duration'  => 60 * 60 * 24,
                 'Max'       => 0,
                 'MaxTime'   => 0,
@@ -69,7 +69,7 @@ class VerbrauchZeitspanneBaseArchiveTest extends TestCase
                 'TimeStamp' => strtotime('02-11-2005 00:00:00')
             ],
             [
-                'Avg'       => 2,
+                'Avg'       => 42,
                 'Duration'  => 60 * 60 * 24,
                 'Max'       => 0,
                 'MaxTime'   => 0,
@@ -78,7 +78,7 @@ class VerbrauchZeitspanneBaseArchiveTest extends TestCase
                 'TimeStamp' => strtotime('03-11-2005 00:00:00')
             ],
             [
-                'Avg'       => 2,
+                'Avg'       => 43,
                 'Duration'  => 60 * 60 * 24,
                 'Max'       => 0,
                 'MaxTime'   => 0,
@@ -94,7 +94,7 @@ class VerbrauchZeitspanneBaseArchiveTest extends TestCase
         SetValue(IPS_GetObjectIDByIdent('EndDate', $instanceID), strtotime('04-11-2005 00:00:00'));
 
         VIZ_Calculate($instanceID);
-        $this->assertEquals(6, GetValue(IPS_GetObjectIDByIdent('Usage', $instanceID)));
+        $this->assertEquals(126, GetValue(IPS_GetObjectIDByIdent('Usage', $instanceID)));
     }
 
     public function testTime(): void
@@ -115,7 +115,7 @@ class VerbrauchZeitspanneBaseArchiveTest extends TestCase
 
         $aggregationDataMinuteStart = [
             [
-                'Avg'       => 2,
+                'Avg'       => 21,
                 'Duration'  => 60,
                 'Max'       => 0,
                 'MaxTime'   => 0,
@@ -124,7 +124,7 @@ class VerbrauchZeitspanneBaseArchiveTest extends TestCase
                 'TimeStamp' => strtotime('05-11-2005 06:58:00')
             ],
             [
-                'Avg'       => 2,
+                'Avg'       => 22,
                 'Duration'  => 60,
                 'Max'       => 0,
                 'MaxTime'   => 0,
@@ -145,7 +145,7 @@ class VerbrauchZeitspanneBaseArchiveTest extends TestCase
 
         $aggregationDataHour = [
             [
-                'Avg'       => 2,
+                'Avg'       => 31,
                 'Duration'  => 60 * 60,
                 'Max'       => 0,
                 'MaxTime'   => 0,
@@ -154,7 +154,7 @@ class VerbrauchZeitspanneBaseArchiveTest extends TestCase
                 'TimeStamp' => strtotime('05-11-2005 07:00:00')
             ],
             [
-                'Avg'       => 2,
+                'Avg'       => 32,
                 'Duration'  => 60 * 60,
                 'Max'       => 0,
                 'MaxTime'   => 0,
@@ -166,7 +166,7 @@ class VerbrauchZeitspanneBaseArchiveTest extends TestCase
 
         $aggregationDataMinuteEnd = [
             [
-                'Avg'       => 2,
+                'Avg'       => 23,
                 'Duration'  => 60,
                 'Max'       => 0,
                 'MaxTime'   => 0,
@@ -175,7 +175,7 @@ class VerbrauchZeitspanneBaseArchiveTest extends TestCase
                 'TimeStamp' => strtotime('05-11-2005 09:00:00')
             ],
             [
-                'Avg'       => 2,
+                'Avg'       => 24,
                 'Duration'  => 60,
                 'Max'       => 0,
                 'MaxTime'   => 0,
@@ -184,7 +184,7 @@ class VerbrauchZeitspanneBaseArchiveTest extends TestCase
                 'TimeStamp' => strtotime('05-11-2005 09:01:00')
             ],
             [
-                'Avg'       => 100,
+                'Avg'       => 1000,
                 'Duration'  => 60,
                 'Max'       => 0,
                 'MaxTime'   => 0,
@@ -197,10 +197,10 @@ class VerbrauchZeitspanneBaseArchiveTest extends TestCase
         AC_StubsAddAggregatedValues($archiveID, $sourceVariableID, 0, $aggregationDataHour);
         AC_StubsAddAggregatedValues($archiveID, $sourceVariableID, 6, $aggregationDataMinuteEnd);
         SetValue(IPS_GetObjectIDByIdent('StartDate', $instanceID), strtotime('05-11-2005 06:58:00'));
-        SetValue(IPS_GetObjectIDByIdent('EndDate', $instanceID), strtotime('05-11-2005 09:02:00'));
+        SetValue(IPS_GetObjectIDByIdent('EndDate', $instanceID), strtotime('10-11-2005 09:02:00'));
         VIZ_Calculate($instanceID);
 
-        $this->assertEquals(12, GetValue(IPS_GetObjectIDByIdent('Usage', $instanceID)));
+        $this->assertEquals(153, GetValue(IPS_GetObjectIDByIdent('Usage', $instanceID)));
     }
 
     public function testDateTime(): void
@@ -220,7 +220,7 @@ class VerbrauchZeitspanneBaseArchiveTest extends TestCase
         AC_SetLoggingStatus($archiveID, $sourceVariableID, true);
         $aggregationDataFirstMinutes = [
             [
-                'Avg'       => 2,
+                'Avg'       => 21,
                 'Duration'  => 60,
                 'Max'       => 0,
                 'MaxTime'   => 0,
@@ -229,7 +229,7 @@ class VerbrauchZeitspanneBaseArchiveTest extends TestCase
                 'TimeStamp' => strtotime('05-11-2005 22:58:00')
             ],
             [
-                'Avg'       => 2,
+                'Avg'       => 22,
                 'Duration'  => 60,
                 'Max'       => 0,
                 'MaxTime'   => 0,
@@ -238,7 +238,7 @@ class VerbrauchZeitspanneBaseArchiveTest extends TestCase
                 'TimeStamp' => strtotime('05-11-2005 22:59:00')
             ],
             [
-                'Avg'       => 100,
+                'Avg'       => 1000,
                 'Duration'  => 60,
                 'Max'       => 0,
                 'MaxTime'   => 0,
@@ -250,7 +250,7 @@ class VerbrauchZeitspanneBaseArchiveTest extends TestCase
 
         $aggregationDataFirstHours = [
             [
-                'Avg'       => 2,
+                'Avg'       => 31,
                 'Duration'  => 60 * 60,
                 'Max'       => 0,
                 'MaxTime'   => 0,
@@ -259,7 +259,7 @@ class VerbrauchZeitspanneBaseArchiveTest extends TestCase
                 'TimeStamp' => strtotime('05-11-2005 23:00:00')
             ],
             [
-                'Avg'       => 100,
+                'Avg'       => 1000,
                 'Duration'  => 60 * 60,
                 'Max'       => 0,
                 'MaxTime'   => 0,
@@ -271,7 +271,7 @@ class VerbrauchZeitspanneBaseArchiveTest extends TestCase
 
         $aggregationDataDay = [
             [
-                'Avg'       => 100,
+                'Avg'       => 1000,
                 'Duration'  => 60 * 60 * 24,
                 'Max'       => 0,
                 'MaxTime'   => 0,
@@ -280,7 +280,7 @@ class VerbrauchZeitspanneBaseArchiveTest extends TestCase
                 'TimeStamp' => strtotime('05-11-2005 00:00:00')
             ],
             [
-                'Avg'       => 2,
+                'Avg'       => 41,
                 'Duration'  => 60 * 60 * 24,
                 'Max'       => 0,
                 'MaxTime'   => 0,
@@ -289,7 +289,7 @@ class VerbrauchZeitspanneBaseArchiveTest extends TestCase
                 'TimeStamp' => strtotime('06-11-2005 00:00:00')
             ],
             [
-                'Avg'       => 2,
+                'Avg'       => 42,
                 'Duration'  => 60 * 60 * 24,
                 'Max'       => 0,
                 'MaxTime'   => 0,
@@ -298,7 +298,7 @@ class VerbrauchZeitspanneBaseArchiveTest extends TestCase
                 'TimeStamp' => strtotime('07-11-2005 00:00:00')
             ],
             [
-                'Avg'       => 100,
+                'Avg'       => 1000,
                 'Duration'  => 60 * 60 * 24,
                 'Max'       => 0,
                 'MaxTime'   => 0,
@@ -310,7 +310,7 @@ class VerbrauchZeitspanneBaseArchiveTest extends TestCase
 
         $aggregationDataLastHours = [
             [
-                'Avg'       => 2,
+                'Avg'       => 32,
                 'Duration'  => 60 * 60,
                 'Max'       => 0,
                 'MaxTime'   => 0,
@@ -319,7 +319,7 @@ class VerbrauchZeitspanneBaseArchiveTest extends TestCase
                 'TimeStamp' => strtotime('08-11-2005 00:00:00')
             ],
             [
-                'Avg'       => 2,
+                'Avg'       => 33,
                 'Duration'  => 60 * 60,
                 'Max'       => 0,
                 'MaxTime'   => 0,
@@ -328,7 +328,7 @@ class VerbrauchZeitspanneBaseArchiveTest extends TestCase
                 'TimeStamp' => strtotime('08-11-2005 01:00:00')
             ],
             [
-                'Avg'       => 100,
+                'Avg'       => 1000,
                 'Duration'  => 60 * 60,
                 'Max'       => 0,
                 'MaxTime'   => 0,
@@ -340,7 +340,7 @@ class VerbrauchZeitspanneBaseArchiveTest extends TestCase
 
         $aggregationDataLastMinutes = [
             [
-                'Avg'       => 2,
+                'Avg'       => 23,
                 'Duration'  => 60,
                 'Max'       => 0,
                 'MaxTime'   => 0,
@@ -349,7 +349,7 @@ class VerbrauchZeitspanneBaseArchiveTest extends TestCase
                 'TimeStamp' => strtotime('08-11-2005 02:00:00')
             ],
             [
-                'Avg'       => 2,
+                'Avg'       => 24,
                 'Duration'  => 60,
                 'Max'       => 0,
                 'MaxTime'   => 0,
@@ -358,7 +358,7 @@ class VerbrauchZeitspanneBaseArchiveTest extends TestCase
                 'TimeStamp' => strtotime('08-11-2005 02:01:00')
             ],
             [
-                'Avg'       => 100,
+                'Avg'       => 1000,
                 'Duration'  => 60,
                 'Max'       => 0,
                 'MaxTime'   => 0,
@@ -379,6 +379,6 @@ class VerbrauchZeitspanneBaseArchiveTest extends TestCase
 
         VIZ_Calculate($instanceID);
 
-        $this->assertEquals(18, GetValue(IPS_GetObjectIDByIdent('Usage', $instanceID)));
+        $this->assertEquals(269, GetValue(IPS_GetObjectIDByIdent('Usage', $instanceID)));
     }
 }

@@ -61,11 +61,9 @@ include_once __DIR__ . '/timetest.php';
                 $v = IPS_GetVariable($sourceVariable);
 
                 $sourceProfile = '';
-                if (IPS_VariableExists($sourceVariable)) {
-                    $sourceProfile = $v['VariableCustomProfile'];
-                    if ($sourceProfile == '') {
-                        $sourceProfile = $v['VariableProfile'];
-                    }
+                $sourceProfile = $v['VariableCustomProfile'];
+                if ($sourceProfile == '') {
+                    $sourceProfile = $v['VariableProfile'];
                 }
 
                 switch ($v['VariableType']) {

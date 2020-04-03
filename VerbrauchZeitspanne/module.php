@@ -45,15 +45,15 @@ include_once __DIR__ . '/timetest.php';
             $this->RegisterVariableInteger('StartDate', 'Start-Datum', $timeProfile, 1);
             $this->EnableAction('StartDate');
 
-            if (GetValue($this->GetIDForIdent('StartDate')) == 0 || $levelOfDetail == 1) {
-                SetValue($this->GetIDForIdent('StartDate'), $this->getTime());
+            if (GetValue($this->GetIDForIdent('StartDate')) == 0) {
+                SetValue($this->GetIDForIdent('StartDate'), strtotime(date('d-m-Y H:i:00', $this->getTime())));
             }
 
             $this->RegisterVariableInteger('EndDate', 'End-Datum', $timeProfile, 2);
             $this->EnableAction('EndDate');
 
-            if (GetValue($this->GetIDForIdent('EndDate')) == 0 || $levelOfDetail == 1) {
-                SetValue($this->GetIDForIdent('EndDate'), $this->getTime());
+            if (GetValue($this->GetIDForIdent('EndDate')) == 0) {
+                SetValue($this->GetIDForIdent('EndDate'), strtotime(date('d-m-Y H:i:00', $this->getTime())));
             }
 
             $sourceVariable = $this->ReadPropertyInteger('SourceVariable');
@@ -96,7 +96,13 @@ include_once __DIR__ . '/timetest.php';
                 case 'StartDate':
                 case 'EndDate':
                     //Neuen Wert in die Statusvariable schreiben
-                    SetValue($this->GetIDForIdent($Ident), $Value);
+                    if (date('s', $Value) != 0) {
+                        echo $this->Translate('The seconds will be ignored.');
+                        SetValue($this->GetIDForIdent($Ident), strtotime(date('d-m-Y H:i:00', $Value)));
+                        break;
+                    } else {
+                        SetValue($this->GetIDForIdent($Ident), $Value);
+                    }
                     //Berechnen
                     $this->Calculate();
                     break;

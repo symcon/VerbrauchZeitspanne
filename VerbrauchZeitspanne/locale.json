@@ -6,7 +6,8 @@
 			"Level of Detail": "Detailgrad",
 			"Date": "Datum",
 			"Time": "Uhrzeit",
-			"Date/Time": "Datum/Uhrzeit"
+			"Date/Time": "Datum/Uhrzeit",
+			"The seconds will be ignored.": "Die Sekunden werden vernachlässigt"
 		}
 	}
 }

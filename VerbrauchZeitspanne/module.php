@@ -137,7 +137,7 @@ include_once __DIR__ . '/timetest.php';
                     //FirstMinutes
                     $firstMinutesStart = strtotime(date('H:i', $startDate) . ':00', $this->getTime());
                     $this->SendDebug('FirstMinutsStart', date('H:i:s', $firstMinutesStart), 0);
-                    $firstMinutesEnd = strtotime(date('H', $startDate) . ':00:00 next hour', $this->getTime());
+                    $firstMinutesEnd = strtotime(date('H', $startDate) . ':59:59', $this->getTime());
                     $this->SendDebug('FirstMinutsEnd', date('H:i:s', $firstMinutesEnd), 0);
                     $firstMinutes = AC_GetAggregatedValues($acID, $variableID, 6 /* Minutes */, $firstMinutesStart, $firstMinutesEnd, 0);
 
@@ -162,7 +162,7 @@ include_once __DIR__ . '/timetest.php';
                     //FirstMinutes
                     $firstMinutesStart = strtotime(date('H:i', $startDate) . ':00', $this->getTime());
                     $this->SendDebug('FirstMinutsStart', date('H:i:s', $firstMinutesStart), 0);
-                    $firstMinutesEnd = strtotime(date('H', $startDate) . ':00:00 next hour', $this->getTime());
+                    $firstMinutesEnd = strtotime(date('H', $startDate) . ':59:59', $this->getTime());
                     $this->SendDebug('FirstMinutsEnd', date('H:i:s', $firstMinutesEnd), 0);
                     $firstMinutes = AC_GetAggregatedValues($acID, $variableID, 6 /* Minutes */, $firstMinutesStart, $firstMinutesEnd, 0);
 
@@ -183,7 +183,7 @@ include_once __DIR__ . '/timetest.php';
                     //LastHours
                     $lastHoursStart = strtotime('00:00:00', $endDate);
                     $this->SendDebug('LastHoursStart', date('d.m.Y H:i:s', $lastHoursStart), 0);
-                    $lastHoursEnd = strtotime(date('H:00:00', $endDate), $endDate);
+                    $lastHoursEnd = strtotime(date('H:59:59', $endDate) . ' - 1 hour', $endDate);
                     $this->SendDebug('LastHoursEnd', date('d.m.Y H:i:s', $lastHoursEnd), 0);
                     $lastHours = AC_GetAggregatedValues($acID, $variableID, 0 /* Hour */, $lastHoursStart, $lastHoursEnd, 0);
 

@@ -48,7 +48,6 @@ class VerbrauchZeitspanneBaseArchiveTest extends TestCase
         IPS_SetProperty($instanceID, 'LevelOfDetail', 0);
         IPS_ApplyChanges($instanceID);
         VIZ_SetTime($instanceID, strtotime('5th November 2005 06:00:00'));
-
         AC_SetLoggingStatus($archiveID, $sourceVariableID, true);
         $aggregationDataDay = [
             [
@@ -92,10 +91,9 @@ class VerbrauchZeitspanneBaseArchiveTest extends TestCase
         AC_StubsAddAggregatedValues($archiveID, $sourceVariableID, 1, $aggregationDataDay);
 
         SetValue(IPS_GetObjectIDByIdent('StartDate', $instanceID), strtotime('02-11-2005 00:00:00'));
-        SetValue(IPS_GetObjectIDByIdent('EndDate', $instanceID), strtotime('04-11-2005 23:59:59'));
+        SetValue(IPS_GetObjectIDByIdent('EndDate', $instanceID), strtotime('04-11-2005 00:00:00'));
 
         VIZ_Calculate($instanceID);
-
         $this->assertEquals(6, GetValue(IPS_GetObjectIDByIdent('Usage', $instanceID)));
     }
 
@@ -195,8 +193,6 @@ class VerbrauchZeitspanneBaseArchiveTest extends TestCase
                 'TimeStamp' => strtotime('05-11-2005 09:02:00')
             ]
         ];
-
-        IPS_EnableDebug($instanceID, 5);
         AC_StubsAddAggregatedValues($archiveID, $sourceVariableID, 6, $aggregationDataMinuteStart);
         AC_StubsAddAggregatedValues($archiveID, $sourceVariableID, 0, $aggregationDataHour);
         AC_StubsAddAggregatedValues($archiveID, $sourceVariableID, 6, $aggregationDataMinuteEnd);
@@ -222,7 +218,6 @@ class VerbrauchZeitspanneBaseArchiveTest extends TestCase
         VIZ_SetTime($instanceID, strtotime('5th November 2005 19:00:00'));
 
         AC_SetLoggingStatus($archiveID, $sourceVariableID, true);
-
         $aggregationDataFirstMinutes = [
             [
                 'Avg'       => 2,

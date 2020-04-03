@@ -16,5 +16,9 @@
 				{"caption": "Date/Time", "value": 2}
 			]
 		}
+	],
+	"status":
+	[
+		{"code": "104", "caption": "The instance is inactive.", "icon": "inactive"}
 	]
 }

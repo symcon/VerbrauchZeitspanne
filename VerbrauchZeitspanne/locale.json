@@ -1,6 +1,7 @@
 {
 	"translations": {
 		"de": { 
+			"The instance is inactive.": "Die Instani ist inaktiv.",
 			"Source": "Quelle",
 			"Level of Detail": "Detailgrad",
 			"Date": "Datum",

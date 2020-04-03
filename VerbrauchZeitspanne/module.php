@@ -76,6 +76,9 @@ include_once __DIR__ . '/timetest.php';
                     default:
                         return;
                 }
+                $this->SetStatus(102);
+            } else {
+                $this->SetStatus(104);
             }
 
             //Add references
@@ -111,6 +114,9 @@ include_once __DIR__ . '/timetest.php';
          */
         public function Calculate()
         {
+            if ($this->GetStatus() != 102) {
+                return;
+            }
             $acID = IPS_GetInstanceListByModuleID('{43192F0B-135B-4CE7-A0A7-1475603F3060}')[0];
             $variableID = $this->ReadPropertyInteger('SourceVariable');
             $startDate = GetValue($this->GetIDForIdent('StartDate'));

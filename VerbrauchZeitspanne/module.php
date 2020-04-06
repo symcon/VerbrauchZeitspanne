@@ -160,9 +160,9 @@ include_once __DIR__ . '/timetest.php';
                 case LOD_DATETIME:
 
                     //FirstMinutes
-                    $firstMinutesStart = strtotime(date('H:i', $startDate) . ':00', $this->getTime());
+                    $firstMinutesStart = strtotime(date('H:i', $startDate) . ':00', $startDate);
                     $this->SendDebug('FirstMinutsStart', date('H:i:s', $firstMinutesStart), 0);
-                    $firstMinutesEnd = strtotime(date('H', $startDate) . ':59:59', $this->getTime());
+                    $firstMinutesEnd = strtotime(date('H', $startDate) . ':59:59', $startDate);
                     $this->SendDebug('FirstMinutsEnd', date('H:i:s', $firstMinutesEnd), 0);
                     $firstMinutes = AC_GetAggregatedValues($acID, $variableID, 6 /* Minutes */, $firstMinutesStart, $firstMinutesEnd, 0);
 
@@ -176,7 +176,7 @@ include_once __DIR__ . '/timetest.php';
                     //Days
                     $daysStart = strtotime(date('d-m-Y', $startDate) . ' 00:00:00 tomorrow', $startDate);
                     $this->SendDebug('StartDays', date('d.m.Y H:i:s', $daysStart), 0);
-                    $daysEnd = strtotime(date('d-m-Y', $endDate) . ' yesterday 23:59:59', $this->getTime());
+                    $daysEnd = strtotime(date('d-m-Y', $endDate) . ' yesterday 23:59:59', $endDate);
                     $this->SendDebug('EndDays', date('d.m.Y H:i:s', $daysEnd), 0);
                     $days = AC_GetAggregatedValues($acID, $variableID, 1 /* Day */, $daysStart, $daysEnd, 0);
 
@@ -188,9 +188,9 @@ include_once __DIR__ . '/timetest.php';
                     $lastHours = AC_GetAggregatedValues($acID, $variableID, 0 /* Hour */, $lastHoursStart, $lastHoursEnd, 0);
 
                     //LastMinutes
-                    $lastMinutesStart = strtotime(date('d.m.Y H', $endDate) . ':00:00', $this->getTime());
+                    $lastMinutesStart = strtotime(date('d.m.Y H', $endDate) . ':00:00', $endDate);
                     $this->SendDebug('LastMinutsStart', date('d.m.Y H:i:s', $lastMinutesStart), 0);
-                    $lastMinutesEnd = strtotime(date('d.m.Y H:i', $endDate) . ':00', $this->getTime());
+                    $lastMinutesEnd = strtotime(date('d.m.Y H:i', $endDate) . ':00', $endDate);
                     $this->SendDebug('LastMinutsEnd', date('d.m.Y H:i:s', $lastMinutesEnd), 0);
                     $lastMinutes = AC_GetAggregatedValues($acID, $variableID, 6 /* Minutes */, $lastMinutesStart, $lastMinutesEnd, 0);
 

@@ -215,7 +215,7 @@ class VerbrauchZeitspanneBaseArchiveTest extends TestCase
         IPS_SetProperty($instanceID, 'SourceVariable', $sourceVariableID);
         IPS_SetProperty($instanceID, 'LevelOfDetail', 2);
         IPS_ApplyChanges($instanceID);
-        VIZ_SetTime($instanceID, strtotime('5th November 2005 19:00:00'));
+        VIZ_SetTime($instanceID, strtotime('20th November 2005 19:00:00'));
 
         AC_SetLoggingStatus($archiveID, $sourceVariableID, true);
         $aggregationDataFirstMinutes = [

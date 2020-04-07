@@ -144,18 +144,16 @@ include_once __DIR__ . '/timetest.php';
                 }
 
                 //FirstMinutes
-                $firstMinutesStart = strtotime(date('H:i', $startDate) . ':00', $startDate);
-                $this->SendDebug('FirstMinutsStart', date('H:i:s', $firstMinutesStart), 0);
+                $this->SendDebug('FirstMinutsStart', date('H:i:s', $startDate), 0);
                 $firstMinutesEnd = strtotime(date('H', $startDate) . ':59:59', $startDate);
                 $this->SendDebug('FirstMinutsEnd', date('H:i:s', $firstMinutesEnd), 0);
-                $values = array_merge($values, AC_GetAggregatedValues($acID, $variableID, 6 /* Minutes */, $firstMinutesStart, $firstMinutesEnd, 0));
+                $values = array_merge($values, AC_GetAggregatedValues($acID, $variableID, 6 /* Minutes */, $startDate, $firstMinutesEnd, 0));
 
                 //LastMinutes
                 $lastMinutesStart = strtotime(date('H', $endDate) . ':00:00', $endDate);
                 $this->SendDebug('LastMinutsStart', date('H:i:s', $lastMinutesStart), 0);
-                $lastMinutesEnd = strtotime(date('H:i', $endDate) . ':00', $endDate);
-                $this->SendDebug('LastMinutsEnd', date('H:i:s', $lastMinutesEnd), 0);
-                $values = array_merge($values, AC_GetAggregatedValues($acID, $variableID, 6 /* Minutes */, $lastMinutesStart, $lastMinutesEnd, 0));
+                $this->SendDebug('LastMinutsEnd', date('H:i:s', $endDate), 0);
+                $values = array_merge($values, AC_GetAggregatedValues($acID, $variableID, 6 /* Minutes */, $lastMinutesStart, $endDate, 0));
 
                 if (date('d.m.Y', $startDate) == date('d.m.Y', $endDate)) {
                     //Hours

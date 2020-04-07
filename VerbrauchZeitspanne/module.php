@@ -174,14 +174,12 @@ include_once __DIR__ . '/timetest.php';
                     $this->SendDebug('LastHoursEnd', date('d.m.Y H:i:s', $lastHoursEnd), 0);
                     $values = array_merge($values, AC_GetAggregatedValues($acID, $variableID, 0 /* Hour */, $lastHoursStart, $lastHoursEnd, 0));
 
-                    if (strtotime('-2 days', $endDate) >= $startDate) {
-                        //Days
-                        $daysStart = $firstHoursEnd + 1;
-                        $this->SendDebug('StartDays', date('d.m.Y H:i:s', $daysStart), 0);
-                        $daysEnd = $lastHoursStart - 1;
-                        $this->SendDebug('EndDays', date('d.m.Y H:i:s', $daysEnd), 0);
-                        $values = array_merge($values, AC_GetAggregatedValues($acID, $variableID, 1 /* Day */, $daysStart, $daysEnd, 0));
-                    }
+                    //Days
+                    $daysStart = $firstHoursEnd + 1;
+                    $this->SendDebug('StartDays', date('d.m.Y H:i:s', $daysStart), 0);
+                    $daysEnd = $lastHoursStart - 1;
+                    $this->SendDebug('EndDays', date('d.m.Y H:i:s', $daysEnd), 0);
+                    $values = array_merge($values, AC_GetAggregatedValues($acID, $variableID, 1 /* Day */, $daysStart, $daysEnd, 0));
                 }
             }
 

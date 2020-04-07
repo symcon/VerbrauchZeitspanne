@@ -132,15 +132,12 @@ include_once __DIR__ . '/timetest.php';
             $sum = 0;
             if ($levelOfDetail == LOD_DATE) {
                 $values = AC_GetAggregatedValues($acID, $variableID, 1 /* Day */, $startDate, strtotime(date('d-m-Y', $endDate) . ' 23:59:59'), 0);
+            } elseif (date('d.m.Y H', $startDate) == date('d.m.Y H', $endDate)) {
+                $values = array_merge($values, AC_GetAggregatedValues($acID, $variableID, 6 /* Minutes */, $startDate, $endDate, 0));
             } else {
                 if ($levelOfDetail == LOD_TIME) {
                     $startDate = strtotime(date('H:i:s', $startDate), $this->getTime());
                     $endDate = strtotime(date('H:i:s', $endDate), $this->getTime());
-                }
-
-                if (date('H', $startDate) == date('H', $endDate)) {
-                    $values = array_merge($values, AC_GetAggregatedValues($acID, $variableID, 6 /* Minutes */, $startDate, $endDate, 0));
-                    return;
                 }
 
                 //FirstMinutes

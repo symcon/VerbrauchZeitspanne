@@ -156,7 +156,7 @@ include_once __DIR__ . '/timetest.php';
                     //Hours
                     $hoursStart = $firstMinutesEnd + 1;
                     $this->SendDebug('StartHours', date('H:i:s', $hoursStart), 0);
-                    $hoursEnd = strtotime(intval(date('H', $endDate)) - 1 . ':59:59', $this->getTime());
+                    $hoursEnd = $lastMinutesStart - 1;
                     $this->SendDebug('EndHours', date('H:i:s', $hoursEnd), 0);
                     $values = array_merge($values, AC_GetAggregatedValues($acID, $variableID, 0 /* Hour */, $hoursStart, $hoursEnd, 0));
                 } else {

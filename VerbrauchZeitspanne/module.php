@@ -142,11 +142,13 @@ include_once __DIR__ . '/timetest.php';
             } else {
                 //FirstMinutes
                 $this->SendDebug('FirstMinutsStart', date('H:i:s', $startDate), 0);
+                //StartDate at H:59:59
                 $firstMinutesEnd = strtotime(date('H', $startDate) . ':59:59', $startDate);
                 $this->SendDebug('FirstMinutsEnd', date('H:i:s', $firstMinutesEnd), 0);
                 $values = array_merge($values, AC_GetAggregatedValues($acID, $variableID, 6 /* Minutes */, $startDate, $firstMinutesEnd, 0));
 
                 //LastMinutes
+                //Full hour of endDate
                 $lastMinutesStart = strtotime(date('H', $endDate) . ':00:00', $endDate);
                 $this->SendDebug('LastMinutsStart', date('H:i:s', $lastMinutesStart), 0);
                 $this->SendDebug('LastMinutsEnd', date('H:i:s', $endDate), 0);
@@ -162,13 +164,14 @@ include_once __DIR__ . '/timetest.php';
                     $values = array_merge($values, AC_GetAggregatedValues($acID, $variableID, 0 /* Hour */, $hoursStart, $hoursEnd, 0));
                 } else {
                     //FirstHours
-                    $firstHoursStart = $firstMinutesEnd + 1;
-                    $this->SendDebug('FirstHoursStart', date('d.m.Y H:i:s', $firstHoursStart), 0);
+                    $this->SendDebug('FirstHoursStart', date('d.m.Y H:i:s', $hoursStart), 0);
+                    //23:59:59 on startDate
                     $firstHoursEnd = strtotime('23:59:59', $startDate);
                     $this->SendDebug('FirstHoursEnd', date('d.m.Y H:i:s', $firstHoursEnd), 0);
-                    $values = array_merge($values, AC_GetAggregatedValues($acID, $variableID, 0 /* Hour */, $firstHoursStart, $firstHoursEnd, 0));
+                    $values = array_merge($values, AC_GetAggregatedValues($acID, $variableID, 0 /* Hour */, $hoursStart, $firstHoursEnd, 0));
 
                     //LastHours
+                    //00:00:00 on endDate
                     $lastHoursStart = strtotime('00:00:00', $endDate);
                     $this->SendDebug('LastHoursStart', date('d.m.Y H:i:s', $lastHoursStart), 0);
                     $this->SendDebug('LastHoursEnd', date('d.m.Y H:i:s', $hoursEnd), 0);

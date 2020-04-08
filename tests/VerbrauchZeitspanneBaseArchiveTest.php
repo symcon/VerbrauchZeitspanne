@@ -196,7 +196,7 @@ class VerbrauchZeitspanneBaseArchiveTest extends TestCase
         AC_StubsAddAggregatedValues($archiveID, $sourceVariableID, 6, $aggregationDataMinuteStart);
         AC_StubsAddAggregatedValues($archiveID, $sourceVariableID, 0, $aggregationDataHour);
         AC_StubsAddAggregatedValues($archiveID, $sourceVariableID, 6, $aggregationDataMinuteEnd);
-        SetValue(IPS_GetObjectIDByIdent('StartDate', $instanceID), strtotime('05-11-2005 06:58:00'));
+        SetValue(IPS_GetObjectIDByIdent('StartDate', $instanceID), strtotime('03-11-2005 06:58:00'));
         SetValue(IPS_GetObjectIDByIdent('EndDate', $instanceID), strtotime('10-11-2005 09:02:00'));
         VIZ_Calculate($instanceID);
 

@@ -2,6 +2,9 @@
 
 declare(strict_types=1);
 
+define('ARCHIVE_GUID', '{43192F0B-135B-4CE7-A0A7-1475603F3060}');
+define('VERBRAUCHZEITSPANNE_GUID', '{F74AA9EF-7B80-4AC8-BE0E-D4C24D8F624B}');
+
 include_once __DIR__ . '/stubs/GlobalStubs.php';
 include_once __DIR__ . '/stubs/KernelStubs.php';
 include_once __DIR__ . '/stubs/ModuleStubs.php';
@@ -37,8 +40,8 @@ class VerbrauchZeitspanneBaseArchiveTest extends TestCase
 
     public function testDate(): void
     {
-        $archiveID = IPS_CreateInstance('{43192F0B-135B-4CE7-A0A7-1475603F3060}');
-        $instanceID = IPS_CreateInstance('{F74AA9EF-7B80-4AC8-BE0E-D4C24D8F624B}');
+        $archiveID = IPS_CreateInstance(ARCHIVE_GUID);
+        $instanceID = IPS_CreateInstance(VERBRAUCHZEITSPANNE_GUID);
 
         $sourceVariableID = IPS_CreateVariable(1 /*Integer*/);
         IPS_SetIdent($sourceVariableID, 'Usage');
@@ -99,8 +102,8 @@ class VerbrauchZeitspanneBaseArchiveTest extends TestCase
 
     public function testTime(): void
     {
-        $archiveID = IPS_CreateInstance('{43192F0B-135B-4CE7-A0A7-1475603F3060}');
-        $instanceID = IPS_CreateInstance('{F74AA9EF-7B80-4AC8-BE0E-D4C24D8F624B}');
+        $archiveID = IPS_CreateInstance(ARCHIVE_GUID);
+        $instanceID = IPS_CreateInstance(VERBRAUCHZEITSPANNE_GUID);
 
         $sourceVariableID = IPS_CreateVariable(1 /*Integer*/);
         IPS_SetIdent($sourceVariableID, 'Usage');
@@ -205,8 +208,8 @@ class VerbrauchZeitspanneBaseArchiveTest extends TestCase
 
     public function testDateTime(): void
     {
-        $archiveID = IPS_CreateInstance('{43192F0B-135B-4CE7-A0A7-1475603F3060}');
-        $instanceID = IPS_CreateInstance('{F74AA9EF-7B80-4AC8-BE0E-D4C24D8F624B}');
+        $archiveID = IPS_CreateInstance(ARCHIVE_GUID);
+        $instanceID = IPS_CreateInstance(VERBRAUCHZEITSPANNE_GUID);
 
         $sourceVariableID = IPS_CreateVariable(1 /*Integer*/);
         IPS_SetIdent($sourceVariableID, 'Usage');

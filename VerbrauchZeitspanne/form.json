@@ -1,6 +1,24 @@
 {
 	"elements":
 	[
-		{ "name": "SourceVariable", "type": "SelectVariable", "caption": "Source" }
+		{
+			"name": "SourceVariable",
+			"type": "SelectVariable",
+			"caption": "Source"
+		},
+		{
+			"type": "Select",
+			"name": "LevelOfDetail",
+			"caption": "Level of Detail",
+			"options": [
+				{"caption": "Date", "value": 0},
+				{"caption": "Time", "value": 1},
+				{"caption": "Date/Time", "value": 2}
+			]
+		}
+	],
+	"status":
+	[
+		{"code": "104", "caption": "The instance is inactive.", "icon": "inactive"}
 	]
 }

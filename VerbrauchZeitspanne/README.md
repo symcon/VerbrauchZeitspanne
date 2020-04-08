@@ -33,7 +33,8 @@ __Konfigurationsseite__:
 
 Name               | Beschreibung
 ------------------ | ---------------------------------
-Quelle             | Quellvariable, die für Verbrauch genutzt werden soll.
+Quelle             | Quellvariable, die für Verbrauch genutzt werden soll
+Detailgrad         | Legt fest wie genau der Start- und Endzeitpunkt festgelegt werden kann (Datum, Uhrzeit, Datum/Uhrzeit)
 
 ### 5. Statusvariablen und Profile
 
@@ -43,8 +44,8 @@ Die Statusvariablen/Kategorien werden automatisch angelegt. Das Löschen einzeln
 
 Name        | Typ     | Beschreibung
 ----------- | ------- | ----------------
-Start-Datum | Integer | Start-Datum für den Verbrauch
-End-Datum   | Integer | End-Datum für den Verbrauch
+Start       | Integer | Start-Datum/Start-Zeit für den Verbrauch (Sekunden werden nicht beachtet)
+Ende        | Integer | End-Datum/End-Zeit für den Verbrauch (Sekunden werden nicht beachtet)
 Verbrauch   | Float   | Verbrauch zwischen Start- und End-Datum
 
 ##### Profile

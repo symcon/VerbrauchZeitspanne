@@ -1,7 +1,13 @@
 {
 	"translations": {
 		"de": { 
-			"Source": "Quelle"
+			"The instance is inactive.": "Die Instanz ist inaktiv.",
+			"Source": "Quelle",
+			"Level of Detail": "Detailgrad",
+			"Date": "Datum",
+			"Time": "Uhrzeit",
+			"Date/Time": "Datum/Uhrzeit",
+			"The seconds will be ignored.": "Die Sekunden werden vernachlässigt"
 		}
 	}
 }

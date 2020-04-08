@@ -44,8 +44,8 @@ Die Statusvariablen/Kategorien werden automatisch angelegt. Das Löschen einzeln
 
 Name        | Typ     | Beschreibung
 ----------- | ------- | ----------------
-Start-Datum | Integer | Start-Datum für den Verbrauch (Sekunden werden nicht beachtet)
-End-Datum   | Integer | End-Datum für den Verbrauch (Sekunden werden nicht beachtet)
+Start       | Integer | Start-Datum/Start-Zeit für den Verbrauch (Sekunden werden nicht beachtet)
+Ende        | Integer | End-Datum/End-Zeit für den Verbrauch (Sekunden werden nicht beachtet)
 Verbrauch   | Float   | Verbrauch zwischen Start- und End-Datum
 
 ##### Profile

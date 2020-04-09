@@ -141,6 +141,10 @@ include_once __DIR__ . '/timetest.php';
             $levelOfDetail = $this->ReadPropertyInteger('LevelOfDetail');
             $values = [];
             $sum = 0;
+            if (($startDate == $endDate) || ($startDate > $endDate)) {
+                SetValue($this->GetIDForIdent('Usage'), 0);
+                return;
+            }
             //Set startDate/endDate for LOD_TIME to same day
             if ($levelOfDetail == LOD_TIME) {
                 $startDate = strtotime(date('H:i:s', $startDate), $this->getTime());

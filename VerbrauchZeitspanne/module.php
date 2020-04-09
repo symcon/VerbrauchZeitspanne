@@ -57,26 +57,37 @@ include_once __DIR__ . '/timetest.php';
             }
 
             $sourceVariable = $this->ReadPropertyInteger('SourceVariable');
+            $archiveID = IPS_GetInstanceListByModuleID('{43192F0B-135B-4CE7-A0A7-1475603F3060}')[0];
             if ($sourceVariable > 0 && IPS_VariableExists($sourceVariable)) {
-                $v = IPS_GetVariable($sourceVariable);
+                if (AC_GetLoggingStatus($archiveID, $sourceVariable) && (AC_GetAggregationType($archiveID, $sourceVariable) == 1 /* Counter */)) {
+                    $v = IPS_GetVariable($sourceVariable);
 
-                $sourceProfile = '';
-                $sourceProfile = $v['VariableCustomProfile'];
-                if ($sourceProfile == '') {
-                    $sourceProfile = $v['VariableProfile'];
-                }
+                    $sourceProfile = '';
+                    $sourceProfile = $v['VariableCustomProfile'];
+                    if ($sourceProfile == '') {
+                        $sourceProfile = $v['VariableProfile'];
+                    }
 
-                switch ($v['VariableType']) {
-                    case 1: /* Integer */
-                        $this->RegisterVariableInteger('Usage', 'Verbrauch', $sourceProfile, 3);
-                        break;
-                    case 2: /* Float */
-                        $this->RegisterVariableFloat('Usage', 'Verbrauch', $sourceProfile, 3);
-                        break;
-                    default:
-                        return;
+                    switch ($v['VariableType']) {
+                        case 1: /* Integer */
+                            $this->RegisterVariableInteger('Usage', 'Verbrauch', $sourceProfile, 3);
+                            break;
+
+                        case 2: /* Float */
+                            $this->RegisterVariableFloat('Usage', 'Verbrauch', $sourceProfile, 3);
+                            break;
+
+                        default:
+                            return;
+                    }
+
+                    $this->SetStatus(102);
+                } elseif (AC_GetLoggingStatus($archiveID, $sourceVariable) == false) {
+                    var_dump(AC_GetLoggingStatus($archiveID, $sourceVariable));
+                    $this->SetStatus(200);
+                } elseif (AC_GetAggregationType($archiveID, $sourceVariable) != 1 /* Counter */) {
+                    $this->SetStatus(201);
                 }
-                $this->SetStatus(102);
             } else {
                 $this->SetStatus(104);
             }

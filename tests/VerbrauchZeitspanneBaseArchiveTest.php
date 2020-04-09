@@ -109,6 +109,9 @@ class VerbrauchZeitspanneBaseArchiveTest extends TestCase
         $instanceID = IPS_CreateInstance(VERBRAUCHZEITSPANNE_GUID);
 
         $sourceVariableID = IPS_CreateVariable(1 /*Integer*/);
+        AC_SetLoggingStatus($archiveID, $sourceVariableID, true);
+        AC_SetAggregationType($archiveID, $sourceVariableID, 1);
+        IPS_ApplyChanges($archiveID);
         IPS_SetIdent($sourceVariableID, 'Usage');
         IPS_SetParent($sourceVariableID, $instanceID);
 
@@ -215,6 +218,9 @@ class VerbrauchZeitspanneBaseArchiveTest extends TestCase
         $instanceID = IPS_CreateInstance(VERBRAUCHZEITSPANNE_GUID);
 
         $sourceVariableID = IPS_CreateVariable(1 /*Integer*/);
+        AC_SetLoggingStatus($archiveID, $sourceVariableID, true);
+        AC_SetAggregationType($archiveID, $sourceVariableID, 1);
+        IPS_ApplyChanges($archiveID);
         IPS_SetIdent($sourceVariableID, 'Usage');
         IPS_SetParent($sourceVariableID, $instanceID);
 

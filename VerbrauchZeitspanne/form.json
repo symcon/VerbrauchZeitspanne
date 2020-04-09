@@ -19,6 +19,8 @@
 	],
 	"status":
 	[
-		{"code": "104", "caption": "The instance is inactive.", "icon": "inactive"}
+		{"code": 104, "caption": "The instance is inactive.", "icon": "inactive"},
+		{"code": 200, "caption": "The Source-Variable is not logged.", "icon": "error"},
+		{"code": 201, "caption": "The Source-Variable must be logged as counter.", "icon": "error"}
 	]
 }

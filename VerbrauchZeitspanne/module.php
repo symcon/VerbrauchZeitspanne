@@ -138,10 +138,13 @@ include_once __DIR__ . '/timetest.php';
             }
             $acID = IPS_GetInstanceListByModuleID('{43192F0B-135B-4CE7-A0A7-1475603F3060}')[0];
             $variableID = $this->ReadPropertyInteger('SourceVariable');
-            $startDate = GetValue($this->GetIDForIdent('StartDate'));
-            $endDate = GetValue($this->GetIDForIdent('EndDate')) - 1;
-            //Reduce enddate if the result doesn't change the date
             $levelOfDetail = $this->ReadPropertyInteger('LevelOfDetail');
+            $startDate = GetValue($this->GetIDForIdent('StartDate'));
+            $endDate = GetValue($this->GetIDForIdent('EndDate'));
+            //Reduce enddate if lod is not date
+            if ($levelOfDetail != LOD_DATE) {
+                $endDate--;
+            }
             $values = [];
             $sum = 0;
             if (($startDate == $endDate) || ($startDate > $endDate)) {

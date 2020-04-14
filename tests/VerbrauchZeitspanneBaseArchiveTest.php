@@ -84,7 +84,7 @@ class VerbrauchZeitspanneBaseArchiveTest extends TestCase
                 'TimeStamp' => strtotime('03-11-2005 00:00:00')
             ],
             [
-                'Avg'       => 1000,
+                'Avg'       => 43,
                 'Duration'  => 60 * 60 * 24,
                 'Max'       => 0,
                 'MaxTime'   => 0,
@@ -100,7 +100,7 @@ class VerbrauchZeitspanneBaseArchiveTest extends TestCase
         SetValue(IPS_GetObjectIDByIdent('EndDate', $instanceID), strtotime('04-11-2005 00:00:00'));
 
         VIZ_Calculate($instanceID);
-        $this->assertEquals(83, GetValue(IPS_GetObjectIDByIdent('Usage', $instanceID)));
+        $this->assertEquals(126, GetValue(IPS_GetObjectIDByIdent('Usage', $instanceID)));
     }
 
     public function testTime(): void

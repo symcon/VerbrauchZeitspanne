@@ -150,7 +150,7 @@ include_once __DIR__ . '/timetest.php';
             //Set startDate/endDate for LOD_TIME to same day
             if ($levelOfDetail == LOD_TIME) {
                 $startDate = strtotime(date('H:i:s', $startDate), $this->getTime());
-                $endDate = strtotime(date('H:i:s', $endDate), $this->getTime()) - 1;
+                $endDate = strtotime(date('H:i:s', $endDate), $this->getTime());
             }
             if ($levelOfDetail == LOD_DATE) {
                 $values = array_merge($values, AC_GetAggregatedValues($acID, $variableID, 1 /* Day */, $startDate, strtotime(date('d-m-Y', $endDate) . ' 23:59:59'), 0));

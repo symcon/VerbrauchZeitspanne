@@ -2,6 +2,8 @@
 	"translations": {
 		"de": { 
 			"The instance is inactive.": "Die Instanz ist inaktiv.",
+			"The Source-Variable is not logged.": "Die Quellvariable wird nicht geloggt.",
+			"The Source-Variable must be logged as counter.": "Die Quellvariable muss als Zähler geloggt sein.",
 			"Source": "Quelle",
 			"Level of Detail": "Detailgrad",
 			"Date": "Datum",

@@ -139,7 +139,7 @@ include_once __DIR__ . '/timetest.php';
             $acID = IPS_GetInstanceListByModuleID('{43192F0B-135B-4CE7-A0A7-1475603F3060}')[0];
             $variableID = $this->ReadPropertyInteger('SourceVariable');
             $startDate = GetValue($this->GetIDForIdent('StartDate'));
-            $endDate = GetValue($this->GetIDForIdent('EndDate'));
+            $endDate = GetValue($this->GetIDForIdent('EndDate')) - 1;
             $levelOfDetail = $this->ReadPropertyInteger('LevelOfDetail');
             $values = [];
             $sum = 0;
@@ -150,7 +150,7 @@ include_once __DIR__ . '/timetest.php';
             //Set startDate/endDate for LOD_TIME to same day
             if ($levelOfDetail == LOD_TIME) {
                 $startDate = strtotime(date('H:i:s', $startDate), $this->getTime());
-                $endDate = strtotime(date('H:i:s', $endDate), $this->getTime());
+                $endDate = strtotime(date('H:i:s', $endDate), $this->getTime()) - 1;
             }
             if ($levelOfDetail == LOD_DATE) {
                 $values = array_merge($values, AC_GetAggregatedValues($acID, $variableID, 1 /* Day */, $startDate, strtotime(date('d-m-Y', $endDate) . ' 23:59:59'), 0));

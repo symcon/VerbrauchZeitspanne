@@ -139,7 +139,11 @@ include_once __DIR__ . '/timetest.php';
             $acID = IPS_GetInstanceListByModuleID('{43192F0B-135B-4CE7-A0A7-1475603F3060}')[0];
             $variableID = $this->ReadPropertyInteger('SourceVariable');
             $startDate = GetValue($this->GetIDForIdent('StartDate'));
-            $endDate = GetValue($this->GetIDForIdent('EndDate')) - 1;
+            $endDate = GetValue($this->GetIDForIdent('EndDate'));
+            //Reduce enddate if the result doesn't change the date
+            if (date('H:i:s', $endDate) != '00:00:00') {
+                $endDate--;
+            }
             $levelOfDetail = $this->ReadPropertyInteger('LevelOfDetail');
             $values = [];
             $sum = 0;

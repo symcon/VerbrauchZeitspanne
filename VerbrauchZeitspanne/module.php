@@ -107,9 +107,11 @@ include_once __DIR__ . '/timetest.php';
                 case 'StartDate':
                 case 'EndDate':
                     //Neuen Wert in die Statusvariable schreiben
-                    if (date('s', $Value) != 0 && $this->ReadPropertyInteger('LevelOfDetail') != LOD_DATE) {
-                        echo $this->Translate('The seconds will be ignored.');
+                    if (date('s', $Value) != 0) {
                         SetValue($this->GetIDForIdent($Ident), strtotime(date('d-m-Y H:i:00', $Value)));
+                        if ($this->ReadPropertyInteger('LevelOfDetail') != LOD_DATE) {
+                            echo $this->Translate('The seconds will be ignored.');
+                        }
                         break;
                     } else {
                         SetValue($this->GetIDForIdent($Ident), $Value);

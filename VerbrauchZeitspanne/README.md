@@ -27,7 +27,7 @@
 
 ### 4. Einrichten der Instanzen in IP-Symcon
 
-- Unter "Instanz hinzufügen" ist das 'Verbrauch in Zeitspanne'-Modul unter dem Hersteller '(Gerät)' aufgeführt.  
+- Unter "Instanz hinzufügen" kann das 'Verbrauch in Zeitspanne'-Modul mithilfe der Schnellsuche gefunden werden.  
 
 __Konfigurationsseite__:
 

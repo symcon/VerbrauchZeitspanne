@@ -16,8 +16,14 @@ include_once __DIR__ . '/timetest.php';
             //Never delete this line!
             parent::Create();
 
+            //Properties
             $this->RegisterPropertyInteger('SourceVariable', 0);
             $this->RegisterPropertyInteger('LevelOfDetail', 0);
+            $this->RegisterPropertyBoolean('UseInterval', false);
+            $this->RegisterPropertyInteger('Interval', 10);
+
+            //Timer
+            $this->RegisterTimer('UpdateTimer', 0, 'VIZ_Calculate($_IPS[\'TARGET\']);');
         }
 
         public function ApplyChanges()
@@ -56,40 +62,31 @@ include_once __DIR__ . '/timetest.php';
                 SetValue($this->GetIDForIdent('EndDate'), strtotime(date('d-m-Y H:i:00', $this->getTime())));
             }
 
+            $this->SetInstanceStatus();
+            if ($this->GetStatus() != 102) {
+                $this->SetTimerInterval('UpdateTimer', 0);
+                return;
+            }
             $sourceVariable = $this->ReadPropertyInteger('SourceVariable');
-            $archiveID = IPS_GetInstanceListByModuleID('{43192F0B-135B-4CE7-A0A7-1475603F3060}')[0];
-            if ($sourceVariable > 0 && IPS_VariableExists($sourceVariable)) {
-                if (AC_GetLoggingStatus($archiveID, $sourceVariable) && (AC_GetAggregationType($archiveID, $sourceVariable) == 1 /* Counter */)) {
-                    $v = IPS_GetVariable($sourceVariable);
+            $v = IPS_GetVariable($sourceVariable);
 
-                    $sourceProfile = '';
-                    $sourceProfile = $v['VariableCustomProfile'];
-                    if ($sourceProfile == '') {
-                        $sourceProfile = $v['VariableProfile'];
-                    }
+            $sourceProfile = '';
+            $sourceProfile = $v['VariableCustomProfile'];
+            if ($sourceProfile == '') {
+                $sourceProfile = $v['VariableProfile'];
+            }
 
-                    switch ($v['VariableType']) {
-                        case 1: /* Integer */
-                            $this->RegisterVariableInteger('Usage', 'Verbrauch', $sourceProfile, 3);
-                            break;
+            switch ($v['VariableType']) {
+                case 1: /* Integer */
+                    $this->RegisterVariableInteger('Usage', 'Verbrauch', $sourceProfile, 3);
+                    break;
 
-                        case 2: /* Float */
-                            $this->RegisterVariableFloat('Usage', 'Verbrauch', $sourceProfile, 3);
-                            break;
+                case 2: /* Float */
+                    $this->RegisterVariableFloat('Usage', 'Verbrauch', $sourceProfile, 3);
+                    break;
 
-                        default:
-                            return;
-                    }
-
-                    $this->SetStatus(102);
-                } elseif (AC_GetLoggingStatus($archiveID, $sourceVariable) == false) {
-                    var_dump(AC_GetLoggingStatus($archiveID, $sourceVariable));
-                    $this->SetStatus(200);
-                } elseif (AC_GetAggregationType($archiveID, $sourceVariable) != 1 /* Counter */) {
-                    $this->SetStatus(201);
-                }
-            } else {
-                $this->SetStatus(104);
+                default:
+                    return;
             }
 
             //Add references
@@ -99,6 +96,24 @@ include_once __DIR__ . '/timetest.php';
             if (IPS_VariableExists($sourceVariable)) {
                 $this->RegisterReference($sourceVariable);
             }
+
+            if ($this->ReadPropertyBoolean('UseInterval')) {
+                $this->SetTimerInterval('UpdateTimer', $this->ReadPropertyInteger('Interval') * 1000 * 60);
+            } else {
+                $this->SetTimerInterval('UpdateTimer', 0);
+            }
+        }
+
+        public function GetConfigurationForm()
+        {
+            $jsonForm = json_decode(file_get_contents(__DIR__ . '/form.json'), true);
+            $jsonForm['elements'][3]['visible'] = $this->ReadPropertyBoolean('UseInterval');
+            return json_encode($jsonForm);
+        }
+
+        public function SwitchInterval($visible)
+        {
+            $this->UpdateFormField('Interval', 'visible', $visible);
         }
 
         public function RequestAction($Ident, $Value)
@@ -124,16 +139,12 @@ include_once __DIR__ . '/timetest.php';
             }
         }
 
-        /**
-         * This function will be available automatically after the module is imported with the module control.
-         * Using the custom prefix this function will be callable from PHP and JSON-RPC through:
-         *
-         * VIZ_Calculate($id);
-         *
-         */
         public function Calculate()
         {
+            $this->SetInstanceStatus();
             if ($this->GetStatus() != 102) {
+                $this->SetTimerInterval('UpdateTimer', 0);
+                $this->SetValue('Usage', 0);
                 return;
             }
             $acID = IPS_GetInstanceListByModuleID('{43192F0B-135B-4CE7-A0A7-1475603F3060}')[0];
@@ -218,5 +229,35 @@ include_once __DIR__ . '/timetest.php';
             }
 
             SetValue($this->GetIDForIdent('Usage'), $sum);
+        }
+
+        private function SetInstanceStatus()
+        {
+            $sourceID = $this->ReadPropertyInteger('SourceVariable');
+            $archiveID = IPS_GetInstanceListByModuleID('{43192F0B-135B-4CE7-A0A7-1475603F3060}')[0];
+
+            //No variable selected
+            if ($sourceID == 0) {
+                $this->SetStatus(104);
+                return;
+            }
+
+            //Selected variable doesn't exist
+            if (!IPS_VariableExists($sourceID)) {
+                $this->SetStatus(200);
+                return;
+            }
+
+            //Check logging
+            if (AC_GetLoggingStatus($archiveID, $sourceID) == false) {
+                $this->SetStatus(201);
+                return;
+            } elseif (AC_GetAggregationType($archiveID, $sourceID) != 1 /* Counter */) {
+                $this->SetStatus(202);
+                return;
+            }
+
+            //Everything ok
+            $this->SetStatus(102);
         }
     }

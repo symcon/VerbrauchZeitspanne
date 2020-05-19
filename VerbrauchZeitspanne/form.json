@@ -1,6 +1,5 @@
 {
-	"elements":
-	[
+	"elements": [
 		{
 			"name": "SourceVariable",
 			"type": "SelectVariable",
@@ -11,16 +10,54 @@
 			"name": "LevelOfDetail",
 			"caption": "Level of Detail",
 			"options": [
-				{"caption": "Date", "value": 0},
-				{"caption": "Time", "value": 1},
-				{"caption": "Date/Time", "value": 2}
+				{
+					"caption": "Date",
+					"value": 0
+				},
+				{
+					"caption": "Time",
+					"value": 1
+				},
+				{
+					"caption": "Date/Time",
+					"value": 2
+				}
 			]
+		},
+		{
+			"type": "CheckBox",
+			"name": "UseInterval",
+			"caption": "Use interval to update",
+			"onChange": "VIZ_SwitchInterval($id, $UseInterval);"
+		},
+		{
+			"type": "NumberSpinner",
+			"name": "Interval",
+			"caption": "Interval",
+			"suffix": "Minutes",
+			"visible": false
 		}
 	],
-	"status":
-	[
-		{"code": 104, "caption": "The instance is inactive.", "icon": "inactive"},
-		{"code": 200, "caption": "The Source-Variable is not logged.", "icon": "error"},
-		{"code": 201, "caption": "The Source-Variable must be logged as counter.", "icon": "error"}
+	"status": [
+		{
+			"code": 104,
+			"caption": "No Source-Variable selected.",
+			"icon": "inactive"
+		},
+		{
+			"code": 200,
+			"caption": "The Source-Variable doesn't exist.",
+			"icon": "error"
+		},
+		{
+			"code": 201,
+			"caption": "The Source-Variable is not logged.",
+			"icon": "error"
+		},
+		{
+			"code": 202,
+			"caption": "The Source-Variable must be logged as counter.",
+			"icon": "error"
+		}
 	]
 }

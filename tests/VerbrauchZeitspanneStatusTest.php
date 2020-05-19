@@ -54,6 +54,7 @@ class VerbrauchZeitspanneStatusTest extends TestCase
 
     public function testNotExist(): void
     {
+        $archiveID = IPS_CreateInstance(ARCHIVE_GUID);
         $instanceID = IPS_CreateInstance(VERBRAUCHZEITSPANNE_GUID);
         IPS_SetProperty($instanceID, 'SourceVariable', 5);
         IPS_ApplyChanges($instanceID);

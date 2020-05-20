@@ -258,6 +258,8 @@ include_once __DIR__ . '/timetest.php';
             }
 
             //Everything ok
-            $this->SetStatus(102);
+            if ($this->GetStatus() != 102) {
+                $this->SetStatus(102);
+            }
         }
     }

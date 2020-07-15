@@ -38,7 +38,7 @@ class VerbrauchZeitspanneStatusTest extends TestCase
         parent::setUp();
     }
 
-    public function testNotSelected(): void
+    public function testActive(): void
     {
         $archiveID = IPS_CreateInstance(ARCHIVE_GUID);
         $instanceID = IPS_CreateInstance(VERBRAUCHZEITSPANNE_GUID);

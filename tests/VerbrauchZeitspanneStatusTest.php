@@ -52,6 +52,15 @@ class VerbrauchZeitspanneStatusTest extends TestCase
         $this->assertEquals(102, $status);
     }
 
+    public function testNotSelected(): void
+    {
+        $archiveID = IPS_CreateInstance(ARCHIVE_GUID);
+        $instanceID = IPS_CreateInstance(VERBRAUCHZEITSPANNE_GUID);
+        IPS_ApplyChanges($instanceID);
+        $status = IPS_GetInstance($instanceID)['InstanceStatus'];
+        $this->assertEquals(104, $status);
+    }
+
     public function testNotExist(): void
     {
         $archiveID = IPS_CreateInstance(ARCHIVE_GUID);

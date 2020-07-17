@@ -14,6 +14,8 @@
 
 * Berechnet für eine Zeitspanne den Verbrauch anhand der Aggregation der ausgewählten Quellvariable.
 * Bei Änderung der Zeitspanne wird der Verbrauch neu ermittelt
+* Verschiedene Detailgerade für Start- und End-Datum
+* Einstellbares Intervall für die Aktualisierung der Berechnung
 
 ### 2. Voraussetzungen
 
@@ -32,10 +34,12 @@
 
 __Konfigurationsseite__:
 
-Name               | Beschreibung
------------------- | ---------------------------------
-Quelle             | Quellvariable, die für Verbrauch genutzt werden soll
-Detailgrad         | Legt fest wie genau der Start- und Endzeitpunkt festgelegt werden kann (Datum, Uhrzeit, Datum/Uhrzeit)
+Name                               | Beschreibung
+---------------------------------- | ---------------------------------
+Quelle                             | Quellvariable, die für Verbrauch genutzt werden soll
+Detailgrad                         | Legt fest wie genau der Start- und Endzeitpunkt festgelegt werden kann (Datum, Uhrzeit, Datum/Uhrzeit)
+Intervall zum Aktualisieren nutzen | Wenn aktiv, wird ein Intervall zum Aktualisieren der Berechnung genutzt
+Intervall                          | Das Intervall in Minuten, in dem die Berechnung aktualisiert wird
 
 ### 5. Statusvariablen und Profile
 

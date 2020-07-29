@@ -5,6 +5,14 @@ declare(strict_types=1);
 define('LOD_DATE', 0);
 define('LOD_TIME', 1);
 define('LOD_DATETIME', 2);
+
+if (!defined('IPS_KERNELMESSAGE')) {
+    define('IPS_KERNELMESSAGE', 10100);
+}
+if (!defined('KR_READY')) {
+    define('KR_READY', 10103);
+}
+
 include_once __DIR__ . '/timetest.php';
     class VerbrauchZeitspanne extends IPSModule
     {
@@ -24,6 +32,9 @@ include_once __DIR__ . '/timetest.php';
 
             //Timer
             $this->RegisterTimer('UpdateTimer', 0, 'VIZ_Calculate($_IPS[\'TARGET\']);');
+
+            //Messages
+            $this->RegisterMessage(0, IPS_KERNELMESSAGE);
         }
 
         public function ApplyChanges()
@@ -62,45 +73,16 @@ include_once __DIR__ . '/timetest.php';
                 SetValue($this->GetIDForIdent('EndDate'), strtotime(date('d-m-Y H:i:00', $this->getTime())));
             }
 
-            $this->SetInstanceStatus();
-            if ($this->GetStatus() != 102) {
-                $this->SetTimerInterval('UpdateTimer', 0);
-                return;
+            //Only call this in READY state. On startup the ArchiveControl instance might not be available yet
+            if (IPS_GetKernelRunlevel() == KR_READY) {
+                $this->setupInstance();
             }
-            $sourceVariable = $this->ReadPropertyInteger('SourceVariable');
-            $v = IPS_GetVariable($sourceVariable);
+        }
 
-            $sourceProfile = '';
-            $sourceProfile = $v['VariableCustomProfile'];
-            if ($sourceProfile == '') {
-                $sourceProfile = $v['VariableProfile'];
-            }
-
-            switch ($v['VariableType']) {
-                case 1: /* Integer */
-                    $this->RegisterVariableInteger('Usage', 'Verbrauch', $sourceProfile, 3);
-                    break;
-
-                case 2: /* Float */
-                    $this->RegisterVariableFloat('Usage', 'Verbrauch', $sourceProfile, 3);
-                    break;
-
-                default:
-                    return;
-            }
-
-            //Add references
-            foreach ($this->GetReferenceList() as $referenceID) {
-                $this->UnregisterReference($referenceID);
-            }
-            if (IPS_VariableExists($sourceVariable)) {
-                $this->RegisterReference($sourceVariable);
-            }
-
-            if ($this->ReadPropertyBoolean('UseInterval')) {
-                $this->SetTimerInterval('UpdateTimer', $this->ReadPropertyInteger('Interval') * 1000 * 60);
-            } else {
-                $this->SetTimerInterval('UpdateTimer', 0);
+        public function MessageSink($TimeStamp, $SenderID, $Message, $Data)
+        {
+            if ($Message == IPS_KERNELMESSAGE && $Data[0] == KR_READY) {
+                $this->setupInstance();
             }
         }
 
@@ -260,6 +242,51 @@ include_once __DIR__ . '/timetest.php';
             //Everything ok
             if ($this->GetStatus() != 102) {
                 $this->SetStatus(102);
+            }
+        }
+
+        private function setupInstance()
+        {
+            $this->SetInstanceStatus();
+
+            if ($this->GetStatus() != 102) {
+                $this->SetTimerInterval('UpdateTimer', 0);
+                return;
+            }
+            $sourceVariable = $this->ReadPropertyInteger('SourceVariable');
+            $v = IPS_GetVariable($sourceVariable);
+
+            $sourceProfile = '';
+            $sourceProfile = $v['VariableCustomProfile'];
+            if ($sourceProfile == '') {
+                $sourceProfile = $v['VariableProfile'];
+            }
+
+            switch ($v['VariableType']) {
+                case 1: /* Integer */
+                    $this->RegisterVariableInteger('Usage', 'Verbrauch', $sourceProfile, 3);
+                    break;
+
+                case 2: /* Float */
+                    $this->RegisterVariableFloat('Usage', 'Verbrauch', $sourceProfile, 3);
+                    break;
+
+                default:
+                    return;
+            }
+
+            //Add references
+            foreach ($this->GetReferenceList() as $referenceID) {
+                $this->UnregisterReference($referenceID);
+            }
+            if (IPS_VariableExists($sourceVariable)) {
+                $this->RegisterReference($sourceVariable);
+            }
+
+            if ($this->ReadPropertyBoolean('UseInterval')) {
+                $this->SetTimerInterval('UpdateTimer', $this->ReadPropertyInteger('Interval') * 1000 * 60);
+            } else {
+                $this->SetTimerInterval('UpdateTimer', 0);
             }
         }
     }

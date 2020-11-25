@@ -134,13 +134,31 @@ include_once __DIR__ . '/timetest.php';
             $levelOfDetail = $this->ReadPropertyInteger('LevelOfDetail');
             $startDate = GetValue($this->GetIDForIdent('StartDate'));
             $endDate = GetValue($this->GetIDForIdent('EndDate'));
+            $values = [];
+            $sum = 0;
+            if ($startDate == $endDate) {
+                $start = strtotime(date('d.m.Y 00:00:00', $startDate));
+                $end = strtotime(date('d.m.Y 23:59:59', $startDate));
+                $values = array_merge($values, AC_GetAggregatedValues($acID, $variableID, 1 /* Day */, $start, $end, 0));
+                $debug = AC_GetLoggedValues($acID, $variableID, $start, $end, 0);
+                var_dump($debug);
+                if ($values === false) {
+                    $this->SendDebug('Error', 'NoData', 0);
+                    return;
+                }
+    
+                foreach ($values as $value) {
+                    $sum += $value['Avg'];
+                }
+    
+                SetValue($this->GetIDForIdent('Usage'), $sum);
+                return;
+            }
             //Reduce enddate if lod is not date
             if ($levelOfDetail != LOD_DATE) {
                 $endDate--;
             }
-            $values = [];
-            $sum = 0;
-            if (($startDate == $endDate) || ($startDate > $endDate)) {
+            if (($startDate > $endDate)) {
                 SetValue($this->GetIDForIdent('Usage'), 0);
                 return;
             }

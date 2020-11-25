@@ -123,36 +123,36 @@ class VerbrauchZeitspanneSameDateTest extends TestCase
         AC_SetLoggingStatus($archiveID, $sourceVariableID, true);
 
         $aggregationDataDay = [
-                    [
-                        'Avg'       => 1000,
-                        'Duration'  => 60 * 60 * 24,
-                        'Max'       => 0,
-                        'MaxTime'   => 0,
-                        'Min'       => 0,
-                        'MinTime'   => 0,
-                        'TimeStamp' => strtotime('04-11-2005 00:00:00')
-                    ],
-                    [
-                        'Avg'       => 41,
-                        'Duration'  => 60 * 60 * 24,
-                        'Max'       => 0,
-                        'MaxTime'   => 0,
-                        'Min'       => 0,
-                        'MinTime'   => 0,
-                        'TimeStamp' => strtotime('05-11-2005 00:00:00')
-                    ],
-                    [
-                        'Avg'       => 42,
-                        'Duration'  => 60 * 60 * 24,
-                        'Max'       => 0,
-                        'MaxTime'   => 0,
-                        'Min'       => 0,
-                        'MinTime'   => 0,
-                        'TimeStamp' => strtotime('06-11-2005 00:00:00')
-                    ]
-                ];
-        
-                AC_StubsAddAggregatedValues($archiveID, $sourceVariableID, 1, $aggregationDataDay);
+            [
+                'Avg'       => 1000,
+                'Duration'  => 60 * 60 * 24,
+                'Max'       => 0,
+                'MaxTime'   => 0,
+                'Min'       => 0,
+                'MinTime'   => 0,
+                'TimeStamp' => strtotime('04-11-2005 00:00:00')
+            ],
+            [
+                'Avg'       => 41,
+                'Duration'  => 60 * 60 * 24,
+                'Max'       => 0,
+                'MaxTime'   => 0,
+                'Min'       => 0,
+                'MinTime'   => 0,
+                'TimeStamp' => strtotime('05-11-2005 00:00:00')
+            ],
+            [
+                'Avg'       => 42,
+                'Duration'  => 60 * 60 * 24,
+                'Max'       => 0,
+                'MaxTime'   => 0,
+                'Min'       => 0,
+                'MinTime'   => 0,
+                'TimeStamp' => strtotime('06-11-2005 00:00:00')
+            ]
+        ];
+
+        AC_StubsAddAggregatedValues($archiveID, $sourceVariableID, 1, $aggregationDataDay);
 
         $aggregationDataMinuteStart = [
             [

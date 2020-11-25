@@ -146,11 +146,11 @@ include_once __DIR__ . '/timetest.php';
                     $this->SendDebug('Error', 'NoData', 0);
                     return;
                 }
-    
+
                 foreach ($values as $value) {
                     $sum += $value['Avg'];
                 }
-    
+
                 SetValue($this->GetIDForIdent('Usage'), $sum);
                 return;
             }

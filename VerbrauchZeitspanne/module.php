@@ -134,41 +134,28 @@ include_once __DIR__ . '/timetest.php';
             $levelOfDetail = $this->ReadPropertyInteger('LevelOfDetail');
             $startDate = GetValue($this->GetIDForIdent('StartDate'));
             $endDate = GetValue($this->GetIDForIdent('EndDate'));
-            $values = [];
-            $sum = 0;
-            if ($startDate == $endDate) {
-                $start = strtotime(date('d.m.Y 00:00:00', $startDate));
-                $end = strtotime(date('d.m.Y 23:59:59', $startDate));
-                $values = array_merge($values, AC_GetAggregatedValues($acID, $variableID, 1 /* Day */, $start, $end, 0));
-                $debug = AC_GetLoggedValues($acID, $variableID, $start, $end, 0);
-                var_dump($debug);
-                if ($values === false) {
-                    $this->SendDebug('Error', 'NoData', 0);
-                    return;
-                }
-
-                foreach ($values as $value) {
-                    $sum += $value['Avg'];
-                }
-
-                SetValue($this->GetIDForIdent('Usage'), $sum);
-                return;
-            }
             //Reduce enddate if lod is not date
             if ($levelOfDetail != LOD_DATE) {
                 $endDate--;
-            }
-            if (($startDate > $endDate)) {
-                SetValue($this->GetIDForIdent('Usage'), 0);
-                return;
             }
             //Set startDate/endDate for LOD_TIME to same day
             if ($levelOfDetail == LOD_TIME) {
                 $startDate = strtotime(date('H:i:s', $startDate), $this->getTime());
                 $endDate = strtotime(date('H:i:s', $endDate), $this->getTime());
+            } elseif ($levelOfDetail == LOD_DATE) {
+                $startDate = strtotime(date('d.m.Y 00:00:00', $startDate), $startDate);
+                $endDate = strtotime(date('d.m.Y 23:59:59', $endDate), $endDate);
             }
+
+            if (($startDate == $endDate) || ($startDate > $endDate)) {
+                SetValue($this->GetIDForIdent('Usage'), 0);
+                return;
+            }
+
+            $values = [];
+            $sum = 0;
             if ($levelOfDetail == LOD_DATE) {
-                $values = array_merge($values, AC_GetAggregatedValues($acID, $variableID, 1 /* Day */, $startDate, strtotime(date('d-m-Y', $endDate) . ' 23:59:59'), 0));
+                $values = array_merge($values, AC_GetAggregatedValues($acID, $variableID, 1 /* Day */, $startDate, $endDate, 0));
             //Check if startDate/endDate are in the same hour
             } elseif (date('d.m.Y H', $startDate) == date('d.m.Y H', $endDate)) {
                 $values = array_merge($values, AC_GetAggregatedValues($acID, $variableID, 6 /* Minutes */, $startDate, $endDate, 0));

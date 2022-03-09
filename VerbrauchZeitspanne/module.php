@@ -93,7 +93,7 @@ include_once __DIR__ . '/timetest.php';
             return json_encode($jsonForm);
         }
 
-        public function SwitchInterval($visible)
+        public function SwitchInterval(bool $visible)
         {
             $this->UpdateFormField('Interval', 'visible', $visible);
         }

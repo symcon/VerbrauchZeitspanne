@@ -1,15 +1,14 @@
 {
-	"id": "{F74AA9EF-7B80-4AC8-BE0E-D4C24D8F624B}",
-	"name": "VerbrauchZeitspanne",
-	"type": 3,
-	"vendor": "",
-	"aliases": 
-	[
-		"Verbrauch in Zeitspanne"
-	],
-	"parentRequirements": [],
-	"childRequirements": [],
-	"implemented": [],
-	"prefix": "VIZ",
-	"url": "https://github.com/symcon/VerbrauchZeitspanne/tree/master/VerbrauchZeitspanne"
+    "id": "{F74AA9EF-7B80-4AC8-BE0E-D4C24D8F624B}",
+    "name": "VerbrauchZeitspanne",
+    "type": 3,
+    "vendor": "",
+    "aliases": [
+        "Verbrauch in Zeitspanne"
+    ],
+    "parentRequirements": [],
+    "childRequirements": [],
+    "implemented": [],
+    "prefix": "VIZ",
+    "url": "https://github.com/symcon/VerbrauchZeitspanne/tree/master/VerbrauchZeitspanne"
 }

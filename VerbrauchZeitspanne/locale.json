@@ -1,19 +1,19 @@
 {
-	"translations": {
-		"de": { 
-			"No Source-Variable selected.": "Keine Quellvariable ausgewählt.",
-			"The Source-Variable is not logged.": "Die Quellvariable wird nicht geloggt.",
-			"The Source-Variable doesn't exist.": "Die Quellveriable existiert nicht.",
-			"The Source-Variable must be logged as counter.": "Die Quellvariable muss als Zähler geloggt sein.",
-			"Source": "Quelle",
-			"Level of Detail": "Detailgrad",
-			"Date": "Datum",
-			"Time": "Uhrzeit",
-			"Date/Time": "Datum/Uhrzeit",
-			"The seconds will be ignored.": "Die Sekunden werden vernachlässigt",
-			"Interval": "Intervall",
-			"Minutes": "Minuten",
-			"Use interval to update": "Intervall zum Aktualisieren nutzen"
-		}
-	}
+    "translations": {
+        "de": {
+            "No Source-Variable selected.": "Keine Quellvariable ausgewählt.",
+            "The Source-Variable is not logged.": "Die Quellvariable wird nicht geloggt.",
+            "The Source-Variable doesn't exist.": "Die Quellveriable existiert nicht.",
+            "The Source-Variable must be logged as counter.": "Die Quellvariable muss als Zähler geloggt sein.",
+            "Source": "Quelle",
+            "Level of Detail": "Detailgrad",
+            "Date": "Datum",
+            "Time": "Uhrzeit",
+            "Date/Time": "Datum/Uhrzeit",
+            "The seconds will be ignored.": "Die Sekunden werden vernachlässigt",
+            "Interval": "Intervall",
+            "Minutes": "Minuten",
+            "Use interval to update": "Intervall zum Aktualisieren nutzen"
+        }
+    }
 }

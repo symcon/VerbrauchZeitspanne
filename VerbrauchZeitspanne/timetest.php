@@ -7,14 +7,14 @@ if (defined('PHPUNIT_TESTSUITE')) {
     {
         private $currentTime = 989884800;
 
-        private function getTime()
-        {
-            return $this->currentTime;
-        }
-
         public function SetTime(int $Time)
         {
             $this->currentTime = $Time;
+        }
+
+        private function getTime()
+        {
+            return $this->currentTime;
         }
     }
 } else {

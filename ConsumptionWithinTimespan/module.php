@@ -14,7 +14,7 @@ if (!defined('KR_READY')) {
 }
 
 include_once __DIR__ . '/timetest.php';
-class VerbrauchZeitspanne extends IPSModule
+class ConsumptionWithinTimespan extends IPSModule
 {
     //Using an own time() function in order to use custom time while testing
     use TestTime;

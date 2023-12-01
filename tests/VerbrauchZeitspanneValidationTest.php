@@ -8,8 +8,8 @@ class VerbrauchZeitspanneValidationTest extends TestCaseSymconValidation
     {
         $this->validateLibrary(__DIR__ . '/..');
     }
-    public function testValidateVerbrauchZeitspanneModule(): void
+    public function testValidateConsumptionWithinTimespanModule(): void
     {
-        $this->validateModule(__DIR__ . '/../VerbrauchZeitspanne');
+        $this->validateModule(__DIR__ . '/../ConsumptionWithinTimespan');
     }
 }

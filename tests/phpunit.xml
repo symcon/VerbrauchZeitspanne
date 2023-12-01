@@ -6,7 +6,7 @@
   </php>
   <source>
     <include>
-      <directory suffix=".php">../VerbrauchZeitspanne</directory>
+      <directory suffix=".php">../ConsumptionWithinTimespan</directory>
     </include>
   </source>
 </phpunit>

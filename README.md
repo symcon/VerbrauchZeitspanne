@@ -6,5 +6,5 @@
 
 Folgende Module beinhaltet das VerbrauchZeitspanne Repository:
 
-- __Verbrauch in Zeitspanne__ ([Dokumentation](https://www.symcon.de/de/service/dokumentation/modulreferenz/verbrauchzeitspanne))  
+- __Verbrauch in Zeitspanne__ ([Dokumentation](https://www.symcon.de/de/service/dokumentation/modulreferenz/verbrauch-in-zeitspanne/))  
 	Berechnet den Verbrauch zwischen einem Start- und End-Datum

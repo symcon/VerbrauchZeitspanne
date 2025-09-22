@@ -6,13 +6,6 @@ define('LOD_DATE', 0);
 define('LOD_TIME', 1);
 define('LOD_DATETIME', 2);
 
-if (!defined('IPS_KERNELMESSAGE')) {
-    define('IPS_KERNELMESSAGE', 10100);
-}
-if (!defined('KR_READY')) {
-    define('KR_READY', 10103);
-}
-
 include_once __DIR__ . '/timetest.php';
 class ConsumptionWithinTimespan extends IPSModule
 {
@@ -62,15 +55,15 @@ class ConsumptionWithinTimespan extends IPSModule
         $this->RegisterVariableInteger('StartDate', 'Start-Datum', $timeProfile, 1);
         $this->EnableAction('StartDate');
 
-        if (GetValue($this->GetIDForIdent('StartDate')) == 0) {
-            SetValue($this->GetIDForIdent('StartDate'), strtotime(date('d-m-Y H:i:00', $this->getTime())));
+        if ($this->GetValue('StartDate') == 0) {
+            $this->SetValue('StartDate', strtotime(date('d-m-Y H:i:00', $this->getTime())));
         }
 
         $this->RegisterVariableInteger('EndDate', 'End-Datum', $timeProfile, 2);
         $this->EnableAction('EndDate');
 
-        if (GetValue($this->GetIDForIdent('EndDate')) == 0) {
-            SetValue($this->GetIDForIdent('EndDate'), strtotime(date('d-m-Y H:i:00', $this->getTime())));
+        if ($this->GetValue('EndDate') == 0) {
+            $this->SetValue('EndDate', strtotime(date('d-m-Y H:i:00', $this->getTime())));
         }
 
         //Only call this in READY state. On startup the ArchiveControl instance might not be available yet
@@ -105,13 +98,13 @@ class ConsumptionWithinTimespan extends IPSModule
             case 'EndDate':
                 //Neuen Wert in die Statusvariable schreiben
                 if (date('s', $Value) != 0) {
-                    SetValue($this->GetIDForIdent($Ident), strtotime(date('d-m-Y H:i:00', $Value)));
+                    $this->SetValue($Ident, strtotime(date('d-m-Y H:i:00', $Value)));
                     if ($this->ReadPropertyInteger('LevelOfDetail') != LOD_DATE) {
                         echo $this->Translate('The seconds will be ignored.');
                     }
                     break;
                 } else {
-                    SetValue($this->GetIDForIdent($Ident), $Value);
+                    $this->SetValue($Ident, $Value);
                 }
                 //Berechnen
                 $this->Calculate();
@@ -132,8 +125,8 @@ class ConsumptionWithinTimespan extends IPSModule
         $acID = IPS_GetInstanceListByModuleID('{43192F0B-135B-4CE7-A0A7-1475603F3060}')[0];
         $variableID = $this->ReadPropertyInteger('SourceVariable');
         $levelOfDetail = $this->ReadPropertyInteger('LevelOfDetail');
-        $startDate = GetValue($this->GetIDForIdent('StartDate'));
-        $endDate = GetValue($this->GetIDForIdent('EndDate'));
+        $startDate = $this->GetValue('StartDate');
+        $endDate = $this->GetValue('EndDate');
         //Reduce enddate if lod is not date
         if ($levelOfDetail != LOD_DATE) {
             $endDate--;
@@ -148,7 +141,7 @@ class ConsumptionWithinTimespan extends IPSModule
         }
 
         if (($startDate == $endDate) || ($startDate > $endDate)) {
-            SetValue($this->GetIDForIdent('Usage'), 0);
+            $this->SetValue('Usage', 0);
             return;
         }
 
@@ -215,7 +208,7 @@ class ConsumptionWithinTimespan extends IPSModule
             $sum += $value['Avg'];
         }
 
-        SetValue($this->GetIDForIdent('Usage'), $sum);
+        $this->SetValue('Usage', $sum);
     }
 
     private function SetInstanceStatus()

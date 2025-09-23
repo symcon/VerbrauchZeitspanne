@@ -12,7 +12,7 @@ if (defined('PHPUNIT_TESTSUITE')) {
             $this->currentTime = $Time;
         }
 
-        private function getTime()
+        protected function getTime()
         {
             return $this->currentTime;
         }
@@ -20,7 +20,7 @@ if (defined('PHPUNIT_TESTSUITE')) {
 } else {
     trait TestTime
     {
-        private function getTime()
+        protected function getTime()
         {
             return time();
         }

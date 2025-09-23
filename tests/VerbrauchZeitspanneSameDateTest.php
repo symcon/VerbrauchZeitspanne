@@ -8,6 +8,7 @@ define('VERBRAUCHZEITSPANNE_GUID', '{F74AA9EF-7B80-4AC8-BE0E-D4C24D8F624B}');
 include_once __DIR__ . '/stubs/GlobalStubs.php';
 include_once __DIR__ . '/stubs/KernelStubs.php';
 include_once __DIR__ . '/stubs/ModuleStubs.php';
+include_once __DIR__ . '/stubs/ConstantStubs.php';
 
 use PHPUnit\Framework\TestCase;
 
